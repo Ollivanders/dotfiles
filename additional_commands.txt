@@ -5,3 +5,4 @@ sudo chown -R root:staff /usr/local/share/zsh
 # Linux convert to using zsh 
 chsh -s /bin/zsh oli
 chsh -s /bin/zsh root
+chsh -s /bin/zsh
