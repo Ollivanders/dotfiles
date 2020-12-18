@@ -140,7 +140,7 @@ install_dotfiles () {
   link_file "$DOTFILES_ROOT" "$HOME/.dotfiles"
 }
 
-# setup_gitconfig
+setup_gitconfig
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
