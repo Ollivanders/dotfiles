@@ -49,10 +49,19 @@ Direct installations of the fonts:
 
 MesloGS NF might be required as well. For some terminals such as windows terminal or termintaor, configuration of this can be done in settings/preferences for the app and the font library specified.
 
+## Font not appearing in vscode
+add the following to settings.json 
+```
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.rendererType": "canvas",
+    "terminal.integrated.shell.osx": "/bin/zsh"
+```
+
 # To do
 * windows terminal profile config 
 * terminator config 
 * automatic font installation 
+* vscode sync and dotfiles integration 
 
 
 # Acknowledgments
