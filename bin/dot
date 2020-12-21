@@ -53,3 +53,6 @@ brew update
 # Install software
 echo "› $ZSH/script/install"
 $DOTFILES/script/install
+
+git submodule init
+git submodule update
