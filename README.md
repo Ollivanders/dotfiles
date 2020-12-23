@@ -36,7 +36,7 @@ p10k configure
 ```
 
 ```
-sudo apt-get install update
+sudo apt-get update
 sudo apt-get install fonts-font-awesome
 sudo apt-get install fonts-powerline
 ```
