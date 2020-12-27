@@ -12,6 +12,7 @@ fi
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/GoogleDrive/Projects
 
+# Global variables 
 export DOTFILES=$HOME/.dotfiles
 export ZSHPATH=${DOTFILES}/zsh
 export OHMYZSHPATH=$HOME/.oh-my-zsh
@@ -136,6 +137,11 @@ plugins=(
   zsh-syntax-highlighting 
   vi-mode
   auto-ls
+  zsh-autosuggestions
+  history-substring-search
+  extract
+  osx
+  alias-finder
   )
 
 source $OHMYZSHPATH/oh-my-zsh.sh

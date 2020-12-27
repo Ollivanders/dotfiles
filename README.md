@@ -83,6 +83,7 @@ add the following to settings.json
 - add scripts to services by custom keybindings
 - option to do zsh installation automatically
 - optional cli configure of ohmyzsh 
+- look at integrating https://github.com/wting/autojump/blob/master/install.py auto 
 
 # Acknowledgments
 

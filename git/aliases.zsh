@@ -34,14 +34,10 @@ alias gm='commit --amend --verbose'
 alias gd='diff'
 alias gds='diff --stat'
 alias gdc='diff --cached'
-alias gs='status -s'
 alias gco='checkout'
 alias gcob='checkout -b'
 
 # list branches sorted by last modified
-alias gb="!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
-alias g# list aliases
-alias gla='!git config -l | grep alias | cut -c 7-'
 alias gf='git fetch --all'
 
 alias grao='git remote add origin'
