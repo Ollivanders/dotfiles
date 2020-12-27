@@ -38,7 +38,6 @@ while test $# -gt 0; do
 	shift
 done
 
-export DOTFILES=$HOME/.dotfiles
 
 # DOTFILES macOS defaults
 $DOTFILES/macos/set-defaults.sh
@@ -51,7 +50,7 @@ echo "› brew update"
 brew update
 
 # Install software
-echo "› $ZSH/script/install"
+echo "› $DOTFILES/script/install"
 $DOTFILES/script/install
 
 git submodule init

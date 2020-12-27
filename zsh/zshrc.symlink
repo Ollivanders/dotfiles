@@ -9,29 +9,28 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-
 # your project folder that we can `c [tab]` to
-# export PROJECTS=~/Code
-export DOTFILESPATH=$HOME/.dotfiles
-export ZSHPATH=${DOTFILESPATH}/zsh
+export PROJECTS=~/GoogleDrive/Projects
+
+export DOTFILES=$HOME/.dotfiles
+export ZSHPATH=${DOTFILES}/zsh
 export OHMYZSHPATH=$HOME/.oh-my-zsh
 
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
 # you'll have access to them in your scripts.
-# if [[ -a ~/.localrc ]]
-# then
-#   source ~/.localrc
-# fi
+if [[ -a ~/.localrc ]]
+then
+  source ~/.localrc
+fi
 
 # all of our zsh files
 typeset -U config_files
-config_files=($DOTFILESPATH/**/*.zsh)
+config_files=($DOTFILES/**/*.zsh)
 
-# Remove custom files that handle their own .zsh stuffs 
+# Remove custom files that handle their own .zsh stuffs, 
+# leaving just the goodies in the their .dotfiles directory
 config_files=(${${${config_files:#*/powerlevel10k*}:#*/custom*}:#*/ohmyzsh*})
-
 for file in ${(M)config_files:#*/path.zsh}
 do
   source $file
@@ -44,8 +43,8 @@ do
 done
 
 # initialize autocomplete here, otherwise functions won't be loaded
-# autoload -U compinit
-# compinit
+autoload -U compinit
+compinit
 
 # load every completion after autocomplete loads
 # for file in ${(M)config_files:#*/completion.zsh}
@@ -53,12 +52,21 @@ done
 #   source $file
 # done
 
+# Better history
+# Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
 unset config_files
 # # initialize autocomplete here, otherwise functions won't be loaded
 # autoload -U compinit
 # compinit
 
-
+###############################################################################
 # unset config_files
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -67,7 +75,7 @@ unset config_files
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
+# a theme from this variable instead of looking in $DOTFILES/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -134,7 +142,7 @@ source $OHMYZSHPATH/oh-my-zsh.sh
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 # source ~/powerlevel10k/powerlevel10k.zsh-theme
-source $DOTFILESPATH/zsh/powerlevel10k/powerlevel10k.zsh-theme
+source $ZSHPATH/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
