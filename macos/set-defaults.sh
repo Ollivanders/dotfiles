@@ -655,8 +655,8 @@ EOD
 
 # Enable “focus follows mouse” for Terminal.app and all X11 apps
 # i.e. hover over a window and start typing in it without clicking first
-#defaults write com.apple.terminal FocusFollowsMouse -bool true
-#defaults write org.x.X11 wm_ffm -bool true
+defaults write com.apple.terminal FocusFollowsMouse -bool true
+defaults write org.x.X11 wm_ffm -bool true
 
 # Enable Secure Keyboard Entry in Terminal.app
 # See: https://security.stackexchange.com/a/47786/8918
@@ -666,8 +666,9 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
 # Install the Solarized Dark theme for iTerm
-# open "${DOTFILES}/init/Solarized Dark.itermcolors"
-open "${DOTFILES}/init/ollivandersIterm.json"
+open "${DOTFILES}/init/Solarized Dark.itermcolors"
+# open "${DOTFILES}/init/ollivandersIterm.json"
+cp ./iterm.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/default.json
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
