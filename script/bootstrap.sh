@@ -136,6 +136,14 @@ install_dotfiles () {
     link_file "$src" "$dst"
   done
 
+  # install p10k.zsh depending on os  
+  if [ "$(uname -s)" == "Darwin" ]
+  then
+    link_file "$DOTFILES_ROOT/zsh/p10kdesigns/macos.zsh" "$HOME/.p10k.zsh"
+  else
+    link_file "$DOTFILES_ROOT/zsh/p10kdesigns/ubuntu.zsh" "$HOME/.p10k.zsh"
+  fi
+
   link_file "$DOTFILES_ROOT/zsh/ohmyzsh" "$HOME/.oh-my-zsh"
   link_file "$DOTFILES_ROOT" "$HOME/.dotfiles"
 }

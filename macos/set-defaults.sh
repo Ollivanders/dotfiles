@@ -668,7 +668,7 @@ defaults write com.apple.Terminal ShowLineMarks -int 0
 # Install the Solarized Dark theme for iTerm
 open "${DOTFILES}/init/Solarized Dark.itermcolors"
 # open "${DOTFILES}/init/ollivandersIterm.json"
-cp ./iterm.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/default.json
+# cp ./iterm.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/default.json
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
