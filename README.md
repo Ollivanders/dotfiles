@@ -1,4 +1,18 @@
+# The Dankest Dotfiles (still in experimental for Ubuntu complete auto config)
+
+Many of us have tapped into the chaotic good energy created from custom preferences, however keeping these bad bois consistent and shared between your work setups, virtual machines, raspberry pi, macbook pro with enhanced graphics and the computer that you let your cat borrow in exchange for him doing the washing up, is not only challenging but damn complicated and frustrating when you can't rely on muscle memory. So here collected, is a ubuntu/mac advanced developer setup.
+
+Your system crashes and a tear starts to trickle down your face at the prospect of setting up your system again. Swipe that misery away, reinstall from here and you will be living the dream once again.
+
+# Description
+
 # Dotfile setup
+
+- will prompt install on mac
+- git --version
+- sudo apt-get install git 
+
+git clone https://github.com/Ollivanders/dotfiles.git
 
 - Make sure zsh is installed and configured
 - Clone the project where ever
@@ -63,6 +77,8 @@ Direct installations of the fonts:
 
 MesloGS NF might be required as well. For some terminals such as windows terminal or termintaor, configuration of this can be done in settings/preferences for the app and the font library specified.
 
+A useful guide for installation in different terminal applications: https://stackoverflow.com/questions/61160791/why-are-font-awesome-characters-not-rendered-or-replaced-on-my-terminal-shell
+
 ## Font not appearing in vscode
 
 add the following to settings.json
@@ -75,6 +91,8 @@ add the following to settings.json
 
 # To do
 
+With an ever morphing world, the number of potential contexts installation should be called from increases as with the ambition. Multiple private versions of this dotfiles exist for different levels of config (simple setup of aliases only vs full ohmyzzsh configuration), so working is taking place to move this into one unified set. Therefore for now, problems in niche examples are too be expected as streamlining takes place.
+
 - windows terminal profile config
 - terminator config
 - automatic font installation
@@ -82,8 +100,9 @@ add the following to settings.json
 - add automator symlink
 - add scripts to services by custom keybindings
 - option to do zsh installation automatically
-- optional cli configure of ohmyzsh 
-- look at integrating https://github.com/wting/autojump/blob/master/install.py auto 
+- optional cli configure of ohmyzsh
+- look at integrating https://github.com/wting/autojump/blob/master/install.py auto
+- make overwrite on individual configs optional e.g. own p10k zsh config 
 
 # Acknowledgments
 
