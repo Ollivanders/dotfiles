@@ -163,6 +163,13 @@ then
   fi
 fi
 
+# Install software
+echo "› $DOTFILES/script/install"
+$DOTFILES/script/install
+
+git submodule init
+git submodule update
+
 # vscode installation of settings.json 
 # if [ `uname` == 'Darwin' ]; then
 #   link "$dotfiles/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"

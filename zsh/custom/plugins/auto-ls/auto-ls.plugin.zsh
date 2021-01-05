@@ -25,7 +25,7 @@ auto-ls-ls () {
 }
 
 auto-ls-git-status () {
-  if [[ $(git rev-parse --show-toplevel 2> /dev/null) -ef $PWD ]]; then
+  if [[ $(git rev-parse --show-toplevel 2> /dev/null) -ef "$PWD" ]]; then
   # if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == true ]]; then
     git status -sb
   fi
