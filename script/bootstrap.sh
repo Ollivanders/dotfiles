@@ -165,7 +165,7 @@ fi
 
 # Install software
 echo "› $DOTFILES/script/install"
-$DOTFILES/script/install
+$DOTFILES/script/install.sh
 
 git submodule init
 git submodule update
