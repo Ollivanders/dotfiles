@@ -6,11 +6,15 @@ Your system crashes and a tear starts to trickle down your face at the prospect 
 
 # Description
 
+- Installation organised by application/OS
+- \*.symlink will be symlinked to your home directory
+- anything titled "install.sh" will be run on start up
+
 # Dotfile setup
 
 - will prompt install on mac
 - git --version
-- sudo apt-get install git 
+- sudo apt-get install git
 
 git clone https://github.com/Ollivanders/dotfiles.git
 
@@ -102,13 +106,15 @@ With an ever morphing world, the number of potential contexts installation shoul
 - option to do zsh installation automatically
 - optional cli configure of ohmyzsh
 - look at integrating https://github.com/wting/autojump/blob/master/install.py auto
-- make overwrite on individual configs optional e.g. own p10k zsh config 
+- make overwrite on individual configs optional e.g. own p10k zsh config
+- reorganise bin/dot
+- automate alias sharing between zsh and bash
 
 # Acknowledgments
 
-Based off https://github.com/holman/dotfiles
+Original fork from https://github.com/holman/dotfiles
 
-Inspiration taken from:
+Inspiration and ideas taken from:
 
 - https://github.com/mathiasbynens/dotfiles/
 - https://github.com/paulirish/dotfile

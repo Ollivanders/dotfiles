@@ -7,46 +7,40 @@
 
 set -e
 
-parentDirectory="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"
-dotfilesDirectory="$(cd "$( dirname "$parentDirectory" )" && pwd -P)"
-
-displayUsageAndExit() {
-	echo "dot -- dotfiles management"
-	echo ""
-	echo "Usage: dot [options]"
-	echo ""
-	echo "Options:"
-	echo "  -e, --edit    Open dotfiles directory for editing"
-	echo "  -h, --help    Show this help message and exit"
-	exit
-}
-
-while test $# -gt 0; do
-	case "$1" in
-		"-h"|"--help")
-			displayUsageAndExit
-			;;
-		"-e"|"--edit")
-			exec "$EDITOR" "$dotfilesDirectory"
-			exit
-			;;
-		*)
-			echo "Invalid option: $1"
-			displayUsageAndExit
-			;;
-	esac
-	shift
-done
+../letsgo "$@"
 
 
-# DOTFILES macOS defaults
-$DOTFILES/macos/set-defaults.sh
+# while test $# -gt 0; do
+# 	case "$1" in
+# 		"-h"|"--help")
+# 			displayUsageAndExit
+# 			;;
+# 		"-e"|"--edit")
+# 			exec "$EDITOR" "$dotfilesDirectory"
+# 			exit
+# 			;;
+# 		*)
+# 			echo "Invalid option: $1"
+# 			displayUsageAndExit
+# 			;;
+# 	esac
+# 	shift
+# done
 
-# Install homebrew
-$DOTFILES/homebrew/installBrew.sh 2>&1
 
-# Upgrade homebrew
-echo "› brew update"
-brew update
-brew upgrade
-$DOTFILES/homebrew/update.sh 2>&1
+# if [ "$(uname -s)" == "Darwin" ]
+# then
+#   echo "installing mac dependencies"
+# 	# DOTFILES macOS default settings
+# 	$DOTFILES/macos/set-defaults.sh 2>&1
+
+# 	# DOTFILES macOS software install and setting of automator
+# 	$DOTFILES/macos/macInstall.sh 2>&1
+
+# 	# Install homebrew
+# 	$DOTFILES/homebrew/installBrew.sh 2>&1
+# 	# Upgrade homebrew
+# 	brew update
+# 	brew upgrade
+# fi
+

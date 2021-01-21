@@ -10,6 +10,7 @@ brew "openssh"
 brew "screen"
 brew "php"
 brew "gmp"
+brew "bash"
 
 # vim tools
 brew "vim"
