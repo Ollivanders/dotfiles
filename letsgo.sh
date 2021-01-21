@@ -207,7 +207,7 @@ echo
 echo 'Warning, we are proceeding with the fundamental alteraion of some of your system default settings.'
 echo 'This will probably not break anything but will alter settings which are not recoverable'
 echo
-echo -n "Hit [ENTER] when you're ready to continue 😊! "
+echo -n "Hit [ENTER] and 🥬 begin "
 read line
 
 #------------------------------------------------------------------------------
