@@ -307,7 +307,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
     info "Running a routine software update before we kick off with the good stuff"
     sudo $DOTFILES_ROOT/ubuntu/update.sh 2>&1
 
-    echo "Would you like to use zsh over bash as your default shell?"
+    echo " "
+    info "Would you like to use zsh over bash as your default shell?"
     echo "Reasons to do this are as follows:"
     echo "-ZSH is built off Bash but made better and not in the 80s"
     echo "-its soo much faster, like comparing the Batmobile to a mobility scooter"
@@ -317,12 +318,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
 
     if [[ ! $line =~ 'y' ]]; then
       info "Noice, lets get zsh setup and installed"
-      $DOTFILES/zsh/installZSH.sh 2>&1
+      sudo $DOTFILES/zsh/installZSH.sh 2>&1
     else
       using_zsh=false
       info "We shall just stick with bash then"
     fi
-    $DOTFILES/ubuntu/ubuntuInstall.sh 2>&1
+    sudo $DOTFILES/ubuntu/ubuntuInstall.sh 2>&1
   fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then #macOS
   info "MacOS, solid, good choice my friend"
