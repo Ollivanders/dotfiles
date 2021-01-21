@@ -2,6 +2,6 @@ APT_NON_INTERACTIVE_OPTIONS=' -yq -o APT::Get::AllowUnauthenticated=yes -o Acqui
 
 echo "installing terminal iTerm2"
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS install terminator
-cp ./terminator/config ~/.config/terminator/config
+cp ~/.dotfiles/ubuntu/terminator/config ~/.config/terminator/config
 
 sudo snap install --classic code
