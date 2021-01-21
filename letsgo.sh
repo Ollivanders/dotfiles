@@ -305,7 +305,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
   prompt_line_yn "Would you like to proceed with the linux specifc setup?"
   if [[ $line =~ 'y' ]]; then
     info "Running a routine software update before we kick off with the good stuff"
-    $DOTFILES_ROOT/ubuntu/update.sh 2>&1
+    sudo $DOTFILES_ROOT/ubuntu/update.sh 2>&1
 
     echo "Would you like to use zsh over bash as your default shell?"
     echo "Reasons to do this are as follows:"
