@@ -1,3 +1,8 @@
+#!/usr/bin/env bash
+#
+# Downloads and configures iterm and updates base software
+
+
 if test ! "$(uname)" = "Darwin"; then
   exit 0
 fi
