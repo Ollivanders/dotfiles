@@ -2,45 +2,10 @@
 #
 # dot
 #
-# `dot` handles installation, updates, things like that. Run it periodically
+# dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
+# TODO: run letsgo, config file version for onky updates and installations, without full on user interface
 
 set -e
 
-../letsgo "$@"
-
-
-# while test $# -gt 0; do
-# 	case "$1" in
-# 		"-h"|"--help")
-# 			displayUsageAndExit
-# 			;;
-# 		"-e"|"--edit")
-# 			exec "$EDITOR" "$dotfilesDirectory"
-# 			exit
-# 			;;
-# 		*)
-# 			echo "Invalid option: $1"
-# 			displayUsageAndExit
-# 			;;
-# 	esac
-# 	shift
-# done
-
-
-# if [ "$(uname -s)" == "Darwin" ]
-# then
-#   echo "installing mac dependencies"
-# 	# DOTFILES macOS default settings
-# 	$DOTFILES/macos/set-defaults.sh 2>&1
-
-# 	# DOTFILES macOS software install and setting of automator
-# 	$DOTFILES/macos/macInstall.sh 2>&1
-
-# 	# Install homebrew
-# 	$DOTFILES/homebrew/installBrew.sh 2>&1
-# 	# Upgrade homebrew
-# 	brew update
-# 	brew upgrade
-# fi
-
+~/.dotfiles/letsgo.sh "$@"
