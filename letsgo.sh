@@ -412,7 +412,7 @@ if [[ $line =~ 'y' ]]; then
           echo "export EDITOR=${editor}" >>'~/.bashrc'
           echo "export GIT_EDITOR=${editor}" >>'~/.bashrc'
         fi
-        if [ -f "~/.bashrc" ]; then
+        if [ -f "~/.zshrc" ]; then
           echo "export EDITOR=${editor}" >>'~/.zshrc'
           echo "export GIT_EDITOR=${editor}" >>'~/.zshrc'
         fi
