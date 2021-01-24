@@ -21,7 +21,7 @@ DOTFILES_DIRECTORY="$(cd "$(dirname "$PARENT_DIRECTORY")" && pwd -P)"
 
 using_zsh=true
 
-function displayUsageAndExit() {
+function displayUsageAndExit {
   echo "letsgo -- entry point for dotfile management"
   echo "  for all your dotfiling needs"
   echo ""
@@ -70,32 +70,32 @@ fi
 echo ''
 
 STEP=1
-function begin_step() {
+function begin_step {
   echo -e "\e${FONTTITLE}"
   echo '----------------------------------------------------------------------'
   echo -e "  Step ${STEP}: $1\e[0m"
   STEP=$((STEP + 1))
 }
 
-function info() {
+function info {
   printf "\r  [ \033[00;34m..\033[0m ] $1\n"
 }
 
-function user() {
+function user {
   printf "\r  [ \033[0;33m??\033[0m ] $1\n"
 }
 
-function success() {
+function success {
   printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
 }
 
-function fail() {
+function fail {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
   echo ''
   exit
 }
 
-function link_file() {
+function link_file {
   local src=$1 dst=$2
 
   local overwrite= backup= skip=
@@ -169,13 +169,13 @@ function link_file() {
   fi
 }
 
-function prompt_line() {
+function prompt_line {
   echo -ne "\e${FONTQUESTION}$1 \e${FONTANSWER}"
   read line
   echo -ne "\e[0m"
 }
 
-function prompt_line_yn() {
+function prompt_line_yn {
   line=''
   while [[ $line != 'n' ]] && [[ $line != 'y' ]] && [[ $line != 'exit' ]]; do
     prompt_line "$1 [y/n/exit]"
@@ -186,11 +186,18 @@ function prompt_line_yn() {
   fi
 }
 
-function wait_for_enter() {
+function wait_for_enter {
   echo
   echo "I'll wait."
   echo -n "Hit [ENTER] when you're done."
   read line
+}
+
+function run_cmd {
+  echo -e "Running: $@"
+  if [[ -z $DRY ]]; then
+    "$@"
+  fi
 }
 
 #------------------------------------------------------------------------------
@@ -251,7 +258,6 @@ if [[ $line =~ 'y' ]]; then
   run_cmd git config --global user.email "${email}"
   #sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
   success 'gitconfig'
-  done
 else
   echo "Sorry didin't mean to invade the setup, lets keep it classy and move on"
 fi
@@ -262,7 +268,7 @@ begin_step 'Setting up dotfiles'
 
 echo "Now we are going to symlink on your config files to this directory"
 
-function install_dotfiles() {
+function install_dotfiles {
   local overwrite_all=false backup_all=false skip_all=false
 
   for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*'); do
