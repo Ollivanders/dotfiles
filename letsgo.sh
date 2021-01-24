@@ -260,7 +260,7 @@ if [[ $line =~ 'y' ]]; then
     prompt_line_yn "This good???"
   done
   # run_cmd git config --global user.name "${user}"
-  run_cmd git config --global user.email "${email}"
+  # run_cmd git config --global user.email "${email}"
   sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
   success 'gitconfig'
 else
