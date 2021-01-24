@@ -40,11 +40,15 @@ while [[ $# -gt 0 ]]; do
   "-r" | "--run")
     RUN="1"
     ;;
+  "-c" | "--config")
+    echo "using a config file for setup is an incoming feature"
+    exit
+    ;;
   "-e" | "--edit")
     exec "$EDITOR" "$dotfilesDirectory"
     exit
     ;;
-  "=h" | "--help")
+  "-h" | "--help")
     displayUsageAndExit
     ;;
   *)
@@ -231,6 +235,7 @@ else
 fi
 
 if [[ $line =~ 'y' ]]; then
+  line='n'
   while [[ ! $line =~ 'y' ]]; do
     echo "Noice, lets do it:"
     info 'setup gitconfig'
@@ -254,9 +259,9 @@ if [[ $line =~ 'y' ]]; then
 
     prompt_line_yn "This good???"
   done
-  run_cmd git config --global user.name "${user}"
+  # run_cmd git config --global user.name "${user}"
   run_cmd git config --global user.email "${email}"
-  #sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+  sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
   success 'gitconfig'
 else
   echo "Sorry didin't mean to invade the setup, lets keep it classy and move on"
