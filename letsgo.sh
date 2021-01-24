@@ -240,11 +240,11 @@ if [[ $line =~ 'y' ]]; then
     echo "Noice, lets do it:"
     info 'setup gitconfig'
 
-    # git_credential='cache'
-    # if [ "$(uname -s)" == "Darwin" ]
-    # then
-    #   git_credential='osxkeychain'
-    # fi
+    git_credential='cache'
+    if [ "$(uname -s)" == "Darwin" ]
+    then
+      git_credential='osxkeychain'
+    fi
 
     echo "We're going to configure git's global settings."
     prompt_line "What's your git author name?"
@@ -261,7 +261,7 @@ if [[ $line =~ 'y' ]]; then
   done
   # run_cmd git config --global user.name "${user}"
   # run_cmd git config --global user.email "${email}"
-  sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+  sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
   success 'gitconfig'
 else
   echo "Sorry didin't mean to invade the setup, lets keep it classy and move on"
@@ -281,14 +281,17 @@ function install_dotfiles {
     link_file "$src" "$dst"
   done
 
-  rm $HOME/.dotfiles
-  link_file "$DOTFILES_ROOT" "$HOME/.dotfiles"
+  if [[ ! -d $HOME/.dotfiles ]]; then
+      link_file "$DOTFILES_ROOT" "$HOME/.dotfiles"
+  fi
 }
 
 prompt_line_yn "Would you like to symlink these files?"
 
 if [[ $line =~ 'y' ]]; then
   install_dotfiles
+else
+  echo "We shall skip over those then..."
 fi
 
 #------------------------------------------------------------------------------
@@ -328,14 +331,15 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
     echo "-these dotfiles are written with ZSH in mind"
     prompt_line_yn "Have you been conviced???"
 
-    if [[ ! $line =~ 'y' ]]; then
+    if [[ $line =~ 'y' ]]; then
       info "Noice, lets get zsh setup and installed"
-      sudo $DOTFILES/zsh/installZSH.sh 2>&1
+      $DOTFILES_ROOT/zsh/installZSH.sh 2>&1
+      info "Please remeber to logout and back in again for this to work"
     else
       using_zsh=false
       info "We shall just stick with bash then"
     fi
-    sudo $DOTFILES/ubuntu/ubuntuInstall.sh 2>&1
+    sudo $DOTFILES_ROOT/ubuntu/ubuntuInstall.sh 2>&1
   fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then #macOS
   info "MacOS, solid, good choice my friend"
@@ -376,17 +380,19 @@ if [ "${using_zsh}" == true ]; then
       link_file "$DOTFILES_ROOT/zsh/p10kdesigns/ubuntu.zsh" "$HOME/.p10k.zsh"
     fi
   fi
-
-  rm $HOME/.oh-my-zsh
-  link_file "$DOTFILES_ROOT/zsh/ohmyzsh" "$HOME/.oh-my-zsh"
-
+  if [[ ! -d $HOME/.oh-my-zsh ]]; then
+    link_file "$DOTFILES_ROOT/zsh/ohmyzsh" "$HOME/.oh-my-zsh"
+  fi
   #------------------------------------------------------------------------------
   # Init zsh themes and external libraries
   begin_step "zsh themes init"
   info "Currently this is the default option for these dotfiles if using zsh"
   echo "So hang tight while we install some external libraries"
-  git submodule init
-  git submodule update
+  prompt_line_yn "You okay with this, it has to be done"
+  if [[ $line =~ 'y' ]]; then
+    git submodule init
+    git submodule update
+  fi
 fi
 
 #------------------------------------------------------------------------------
@@ -409,7 +415,7 @@ if [[ $line =~ 'y' ]]; then
     prompt_line "What editor do you want?"
     editor=$line
 
-    if [[ $editor = '' ]]; then
+    if [[ $editor =~ '' ]]; then
       editor='-'
       echo "Ok, I won't touch GIT_EDITOR."
     else
@@ -419,7 +425,7 @@ if [[ $line =~ 'y' ]]; then
       echo -e "  export EDITOR='\e${FONTVAR}${editor}\e[0m'"     # TODO: be more descriptive
       echo
       prompt_line_yn "Is this what you want?"
-      if [[ $line = 'y' ]]; then
+      if [[ $line =~ 'y' ]]; then
         if [ -f "~/.bashrc" ]; then
           echo "export EDITOR=${editor}" >>'~/.bashrc'
           echo "export GIT_EDITOR=${editor}" >>'~/.bashrc'

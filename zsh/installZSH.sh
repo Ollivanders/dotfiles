@@ -9,6 +9,6 @@ echo "installing zsh"
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS update
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS install zsh
 zsh --version
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh) $USER
 
-echo "You is now having a great time with shell=$SHELL"
+echo "You is now having a great time with zsh, but this will require you to log out and back in"
