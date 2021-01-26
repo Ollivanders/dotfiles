@@ -21,7 +21,7 @@ DOTFILES_DIRECTORY="$(cd "$(dirname "$PARENT_DIRECTORY")" && pwd -P)"
 
 using_zsh=true
 
-function displayUsageAndExit {
+function displayUsageAndExit() {
   echo "letsgo -- entry point for dotfile management"
   echo "  for all your dotfiling needs"
   echo ""
@@ -74,32 +74,32 @@ fi
 echo ''
 
 STEP=1
-function begin_step {
+function begin_step() {
   echo -e "\e${FONTTITLE}"
   echo '----------------------------------------------------------------------'
   echo -e "  Step ${STEP}: $1\e[0m"
   STEP=$((STEP + 1))
 }
 
-function info {
+function info() {
   printf "\r  [ \033[00;34m..\033[0m ] $1\n"
 }
 
-function user {
+function user() {
   printf "\r  [ \033[0;33m??\033[0m ] $1\n"
 }
 
-function success {
+function success() {
   printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
 }
 
-function fail {
+function fail() {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
   echo ''
   exit
 }
 
-function link_file {
+function link_file() {
   local src=$1 dst=$2
 
   local overwrite= backup= skip=
@@ -173,13 +173,13 @@ function link_file {
   fi
 }
 
-function prompt_line {
+function prompt_line() {
   echo -ne "\e${FONTQUESTION}$1 \e${FONTANSWER}"
   read line
   echo -ne "\e[0m"
 }
 
-function prompt_line_yn {
+function prompt_line_yn() {
   line=''
   while [[ $line != 'n' ]] && [[ $line != 'y' ]] && [[ $line != 'exit' ]]; do
     prompt_line "$1 [y/n/exit]"
@@ -190,14 +190,14 @@ function prompt_line_yn {
   fi
 }
 
-function wait_for_enter {
+function wait_for_enter() {
   echo
   echo "I'll wait."
   echo -n "Hit [ENTER] when you're done."
   read line
 }
 
-function run_cmd {
+function run_cmd() {
   echo -e "Running: $@"
   if [[ -z $DRY ]]; then
     "$@"
@@ -241,8 +241,7 @@ if [[ $line =~ 'y' ]]; then
     info 'setup gitconfig'
 
     git_credential='cache'
-    if [ "$(uname -s)" == "Darwin" ]
-    then
+    if [[ "$OSTYPE" == "darwin"* ]]; then #macOS
       git_credential='osxkeychain'
     fi
 
@@ -261,7 +260,7 @@ if [[ $line =~ 'y' ]]; then
   done
   # run_cmd git config --global user.name "${user}"
   # run_cmd git config --global user.email "${email}"
-  sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+  sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example >git/gitconfig.local.symlink
   success 'gitconfig'
 else
   echo "Sorry didin't mean to invade the setup, lets keep it classy and move on"
@@ -273,7 +272,7 @@ begin_step 'Setting up dotfiles'
 
 echo "Now we are going to symlink on your config files to this directory"
 
-function install_dotfiles {
+function install_dotfiles() {
   local overwrite_all=false backup_all=false skip_all=false
 
   for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*'); do
@@ -282,7 +281,7 @@ function install_dotfiles {
   done
 
   if [[ ! -d $HOME/.dotfiles ]]; then
-      link_file "$DOTFILES_ROOT" "$HOME/.dotfiles"
+    link_file "$DOTFILES_ROOT" "$HOME/.dotfiles"
   fi
 }
 
@@ -395,52 +394,106 @@ if [ "${using_zsh}" == true ]; then
   fi
 fi
 
+
 #------------------------------------------------------------------------------
-# Setup default editor
-begin_step 'default editor'
+# Generate SSH key or copy
+begin_step 'SSH key'
+echo "Let's set up the SSH public and private keys for bitbucket."
+echo
+echo "I can generate new keys, or you can copy existing keys from the"
+echo "host system."
+action=''
+while [[ $action != 'generate' ]] && [[ $action != 'copy' ]] ; do
+    prompt_line "What do you want to do? [generate/copy]"
+    action=$line
+done
 
-if [ "${EDITOR}" != "" ]; then
-  echo "Your current editor is: ${EDITOR}"
-  prompt_line_yn "Would you like to reconfigure this?"
-else
-  prompt_line_yn "Would you like to set your default editor?"
+pubkey="${HOME}/.ssh/id_rsa.pub"
+
+if [[ $action = 'copy' ]] ; then # Copy existing key
+    copycommand="scp -r /path/to/host/.ssh $(whoami)@$(hostname -I | awk '{print $2}'):$(cd ; pwd)/.ssh"
+    echo -n "${copycommand}" | xsel --clipboard
+    echo    "Run this in bash/cygwin on your host system, I've already copied"
+    echo -e "it into the clipboard for you \e${FONTFACE}😎 \e[0m:"
+    echo
+    echo -e "  \e${FONTVAR}${copycommand}\e[0m "
+    wait_for_enter
+    
+    elif [[ $action = 'generate' ]] ; then # Generate new key
+    run_cmd ssh-keygen
+    run_cmd ssh-add "${pubkey}"
+    run_cmd ssh-add -l
 fi
 
-if [[ $line =~ 'y' ]]; then
-  editor=''
-  while [[ $editor = '' ]]; do
-    echo "Let's set up the editor that git will use."
-    echo 'Type "emacs", "code" "vim", "nano" or some other booky editor if you got it. You can also input a custom value or'
-    echo "leave blank to use default."
-    prompt_line "What editor do you want?"
-    editor=$line
+# Validate
+if [ ! -e "${pubkey}" ] ; then
+    echo -e "\e${FONTFAIL}There's no ${pubkey}... Aborting\e[0m "
+    exit 1
+fi
 
-    if [[ $editor =~ '' ]]; then
-      editor='-'
-      echo "Ok, I won't touch GIT_EDITOR."
-    else
-      echo "I'm going put this is ~/.bashrc:"
-      echo
-      echo -e "  export GIT_EDITOR='\e${FONTVAR}${editor}\e[0m'" # TODO: be more descriptive
-      echo -e "  export EDITOR='\e${FONTVAR}${editor}\e[0m'"     # TODO: be more descriptive
-      echo
-      prompt_line_yn "Is this what you want?"
-      if [[ $line =~ 'y' ]]; then
-        if [ -f "~/.bashrc" ]; then
-          echo "export EDITOR=${editor}" >>'~/.bashrc'
-          echo "export GIT_EDITOR=${editor}" >>'~/.bashrc'
-        fi
-        if [ -f "~/.zshrc" ]; then
-          echo "export EDITOR=${editor}" >>'~/.zshrc'
-          echo "export GIT_EDITOR=${editor}" >>'~/.zshrc'
-        fi
-        # EXPORT_TO_BASHRC="${EXPORT_TO_BASHRC}\nexport GIT_EDITOR='${editor}'"
-      else
-        editor=''
-      fi
+EXPORT_TO_BASHRC="${EXPORT_TO_BASHRC}\nexport GIT_SSH_COMMAND='ssh -o ControlPath=none'"
+bashrc="${HOME}/.bashrc"
+echo -e "Writing to \e${FONTVAR}${bashrc}\e[0m"
+if [[ -z $DRY ]] ; then
+    echo -e "# Generated by setup.sh - $(date)\n${EXPORT_TO_BASHRC}" >> "${bashrc}"
+    run_cmd . "${bashrc}"
+fi
+
+sshconfig="${HOME}/.ssh/config"
+if [[ ! -e "${sshconfig}" ]] ; then
+    echo -e "Writing to \e${FONTVAR}${sshconfig}\e[0m"
+    if [[ -z $DRY ]] ; then
+        echo -e "Host bitbucket.org\n ControlMaster yes\n IdentityFile ~/.ssh/id_rsa" > "${sshconfig}"
     fi
-  done
 fi
+
+
+#------------------------------------------------------------------------------
+# # Setup default editor
+# begin_step 'default editor'
+
+# if [ "${EDITOR}" != "" ]; then
+#   echo "Your current editor is: ${EDITOR}"
+#   prompt_line_yn "Would you like to reconfigure this?"
+# else
+#   prompt_line_yn "Would you like to set your default editor?"
+# fi
+
+# if [[ $line =~ 'y' ]]; then
+#   editor=''
+#   while [[ $editor = '' ]]; do
+#     echo "Let's set up the editor that git will use."
+#     echo 'Type "emacs", "code" "vim", "nano" or some other booky editor if you got it. You can also input a custom value or'
+#     echo "leave blank to use default."
+#     prompt_line "What editor do you want?"
+#     editor=$line
+
+#     if [[ $editor =~ '' ]]; then
+#       editor='-'
+#       echo "Ok, I won't touch GIT_EDITOR."
+#     else
+#       echo "I'm going put this is ~/.bashrc:"
+#       echo
+#       echo -e "  export GIT_EDITOR='\e${FONTVAR}${editor}\e[0m'" # TODO: be more descriptive
+#       echo -e "  export EDITOR='\e${FONTVAR}${editor}\e[0m'"     # TODO: be more descriptive
+#       echo
+#       prompt_line_yn "Is this what you want?"
+#       if [[ $line =~ 'y' ]]; then
+#         if [ -f "~/.bashrc" ]; then
+#           echo "export EDITOR=${editor}" >>'~/.bashrc'
+#           echo "export GIT_EDITOR=${editor}" >>'~/.bashrc'
+#         fi
+#         if [ -f "~/.zshrc" ]; then
+#           echo "export EDITOR=${editor}" >>'~/.zshrc'
+#           echo "export GIT_EDITOR=${editor}" >>'~/.zshrc'
+#         fi
+#         # EXPORT_TO_BASHRC="${EXPORT_TO_BASHRC}\nexport GIT_EDITOR='${editor}'"
+#       else
+#         editor=''
+#       fi
+#     fi
+#   done
+# fi
 
 echo ""
 success "Everything has been installed, polished and setup,"
