@@ -42,6 +42,6 @@ alias gcob='checkout -b'
 alias gf='git fetch --all'
 
 alias grao='git remote add origin'
-alias gac='!git add . && git commit -am'
+alias gac='git add . && git commit -am'
 alias gpushitgood='git push -u origin --all'
 alias gundo-commit='git reset --soft HEAD-1'
