@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# Sets macOS defaults by running $DOTFILES/macos/set-defaults.sh.
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
+    echo "Linux, nice"
+elif [[ "$OSTYPE" == "darwin"* ]]; then #macOS
+    exec $DOTFILES/macos/set-defaults.sh
+elif [[ "$OSTYPE" == "win32" ]]; then # Wins (what are you doing)
+    echo "Why windows man, why????"
+else
+    echo "You is using: $OSTYPE and are therefore beyond these dotfiles, good luck on your further adventures"
+fi
+

@@ -1,0 +1,41 @@
+[global_config]
+[keybindings]
+  new_window = <Primary><Shift>n
+[profiles]
+  [[default]]
+    background_color = "#002b36"
+    background_darkness = 0.03
+    cursor_color = "#aaaaaa"
+    foreground_color = "#839496"
+    show_titlebar = False
+    scroll_on_output = True
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+  [[Batman]]
+    allow_bold = False
+    background_color = "#1b1d1e"
+    background_darkness = 0.05
+    cursor_color = "#fcef0c"
+    font = Serif 10
+    foreground_color = "#6f6f6f"
+    show_titlebar = False
+    palette = "#1b1d1e:#e6dc44:#c8be46:#f4fd22:#737174:#747271:#62605f:#c6c5bf:#505354:#fff78e:#fff27d:#feed6c:#919495:#9a9a9d:#a3a3a6:#dadbd6"
+[layouts]
+  [[default]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 668:195
+      maximised = False
+      fullscreen = False
+      size = 734, 451
+      title = oli@donnie:~
+      last_active_term = dcc06ed9-a58a-48f2-9f0a-f5eaabff486b
+      last_active_window = True
+    [[[terminal1]]]
+      type = Terminal
+      parent = child0
+      order = 0
+      profile = Batman
+      uuid = dcc06ed9-a58a-48f2-9f0a-f5eaabff486b
+[plugins]

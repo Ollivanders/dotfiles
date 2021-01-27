@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+# Script for copying ssh key to clipboard
+
+if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
+    if grep -q Microsoft /proc/version; then
+        clip.exe | cat ~/.ssh/id_rsa.pub
+    else
+        cat ~/.ssh/id_rsa.pub | xclip
+    fi
+elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
+    cat ~/.ssh/id_rsa.pub | pbcopy
+else
+    echo "Sorry ${OSTYPE} unsupported"
+    exit 0
+fi
+
+echo '=> Public key copied to pasteboard.'

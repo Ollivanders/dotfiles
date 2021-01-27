@@ -1,0 +1,71 @@
+# window management
+# cask "spectacle"
+
+# shell tools, update
+# cask "iterm2" # currently installed in terminal script to include profile and preferences 
+brew "tmux"
+brew "zsh"
+brew "grep"
+brew "openssh"
+brew "php"
+brew "gmp"
+brew "bash"
+
+# vim tools
+brew "vim"
+brew "aspell"
+brew "ctags"
+
+# search tools
+brew "the_silver_searcher"
+
+# Source Control Tools
+brew "hub"
+brew "tig"
+
+# keyboard tools
+# cask "karabiner-elements"
+
+# databases
+# cask "postgres"
+
+# languages
+brew "node"
+brew "pyenv"
+brew "pyenv-virtualenv"
+# brew "zlib" # needed for pyenv installing
+# brew "sqlite"
+
+# Others ---------------------------------------------------------------------------
+
+#  font tools.
+# brew tap bramstein/webfonttools
+# brew  "sfnt2woff"
+# brew  "sfnt2woff-zopfli"
+# brew  "woff2"
+
+#  some CTF tools; see https://github.com/ctfs/write-ups.
+# brew  "aircrack-ng"
+# brew  "bfg"
+# brew  "binutils"
+# brew  "binwalk"
+# brew  "cifer"
+# brew  "dex2jar"
+# brew  "dns2tcp"
+# brew  "fcrackzip"
+# brew  "foremost"
+# brew  "hashpump"
+# brew  "hydra"
+# brew  "john"
+# brew  "knock"
+# brew  "netpbm"
+# brew  "nmap"
+# brew  "pngcheck"
+# brew  "socat"
+# brew  "sqlmap"
+# brew  "tcpflow"
+# brew  "tcpreplay"
+# brew  "tcptrace"
+# brew  "ucspi-tcp" # `tcpserver` etc.
+# brew  "xpdf"
+# brew  "xz"
