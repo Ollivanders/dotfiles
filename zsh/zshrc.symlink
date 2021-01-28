@@ -83,24 +83,37 @@ COMPLETION_WAITING_DOTS="true"
 
 
 # Would you like to use another custom folder than $ZSH/custom?
-export ZSH_CUSTOM=$ZSHPATH/custom
+ZSH_CUSTOM=${ZSHPATH}/custom
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse
 # Add wisely, as too many plugins slow down shell startup.
+if [[ "$OSTYPE" =~ "darwin"* ]]; then # macOS
 plugins=(
   git 
   zsh-syntax-highlighting 
-  vi-mode
+  # vi-mode
   auto-ls
   zsh-autosuggestions
   history-substring-search
   extract
+  alias-finder
   osx
+  )
+else
+plugins=(
+  git 
+  zsh-syntax-highlighting 
+  # vi-mode
+  auto-ls
+  zsh-autosuggestions
+  history-substring-search
+  extract
   alias-finder
   )
+fi
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 source $ZSH/oh-my-zsh.sh
