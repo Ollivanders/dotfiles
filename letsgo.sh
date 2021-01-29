@@ -160,18 +160,20 @@ function link_file() {
 
 #------------------------------------------------------------------------------
 # Intro
-echo
-echo -e "  \e${FONTTITLE} Welcome to your tasty $OSTYPE setup \e[0m"
-echo
+function intro() {
+  echo
+  echo -e "  \e${FONTTITLE} Welcome to your tasty $OSTYPE setup \e[0m"
+  echo
 
-echo 'You will recieve a prompt at most decisions.'
-echo 'This is only to give you more control over the install process if there are custom parts of your system,'
-echo 'Therefore do not shy away from just always saying yes ;)'
-echo 'From here you should be able to get this system quickly grooving...'
-echo
-echo 'Warning, we are proceeding with the fundamental alteraion of some of your system default settings.'
-echo 'This will probably not break anything but will alter settings which are not recoverable'
-wait_for_enter
+  echo 'You will recieve a prompt at most decisions.'
+  echo 'This is only to give you more control over the install process if there are custom parts of your system,'
+  echo 'Therefore do not shy away from just always saying yes ;)'
+  echo 'From here you should be able to get this system quickly grooving...'
+  echo
+  echo 'Warning, we are proceeding with the fundamental alteraion of some of your system default settings.'
+  echo 'This will probably not break anything but will alter settings which are not recoverable'
+  wait_for_enter
+}
 
 #------------------------------------------------------------------------------
 # Git Config
@@ -531,19 +533,20 @@ done
 
 # Used for error handling, so script calls its self if its planning to run anything
 if [[ $RUN = '0' ]]; then
-  ./setup.sh --run
+  ./letsgo.sh --run
   RESULT="$?"
   if [[ $RESULT != '0' ]]; then
     echo -e "\e${FONTFAIL}Oh no \e${FONTFACE}😭 \e${FONTFAIL}... failed with status $RESULT\e[0m" >>/dev/stderr
     exit $RESULT
   else
-    echo -e "\e${FONTOK}Success! \e${FONTFACE}😊 \e[0m"
+    echo -e "\e${FONTOK}Success! \e${FONTFACE}😊\e[0m"
     exit $RESULT
   fi
 fi
 
 echo ''
 
+intro
 setup_git
 setup_dotfiles
 setup_os
