@@ -95,20 +95,33 @@ add the following to settings.json
 
 # To do
 
-With an ever morphing world, the number of potential contexts installation should be called from increases as with the ambition. Multiple private versions of this dotfiles exist for different levels of config (simple setup of aliases only vs full ohmyzzsh configuration), so working is taking place to move this into one unified set. Therefore for now, problems in niche examples are too be expected as streamlining takes place.
+With an ever morphing world, the number of potential contexts installation that could be called from increases as with the ambition of this collection. Multiple private versions of this dotfiles exist for different levels of config (simple setup of aliases only vs full ohmyzzsh configuration), so working is taking place to move this into one unified set. Therefore for now, problems in niche examples are too be expected as streamlining takes place.
 
-- windows terminal profile config
-- terminator config
-- automatic font installation
-- vscode sync and dotfiles integration
-- add automator symlink
-- add scripts to services by custom keybindings
-- option to do zsh installation automatically
-- optional cli configure of ohmyzsh
-- look at integrating https://github.com/wting/autojump/blob/master/install.py auto
-- make overwrite on individual configs optional e.g. own p10k zsh config
-- reorganise bin/dot
-- automate alias sharing between zsh and bash
+
+- OS specific
+    - windows terminal profile config
+    - add automator symlink and other mac services configuration
+    - add scripts to services by custom keybindings
+    - look at integrating https://github.com/wting/autojump/blob/master/install.py auto
+    - save ubuntu settings (favorites, dock position and size etc. )
+
+- Application specific
+    - vscode sync and dotfiles integration
+    - terminator config
+
+- shell
+    - make overwrite on individual configs optional e.g. own p10k zsh config
+    - optional cli configure of ohmyzsh
+    - option to do zsh installation automatically
+    - automate alias sharing between zsh and bash
+    - automatic font installation
+
+- Main setup and handling
+    - reorganise bin/dot
+    - improved print output control -> inform user of what is about to happen and give more warnings if dangerous, better colouring
+    - choice to only use bash and or ignore 
+    - update all packages script simplify
+    - config file with default responses to prompts in letsgo.sh 
 
 # Acknowledgments
 
