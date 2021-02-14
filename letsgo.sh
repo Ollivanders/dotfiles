@@ -597,7 +597,6 @@ function config_file() {
 #------------------------------------------------------------------------------
 # Parse args
 trap clean_up EXIT
-zsh p10k configure
 while [[ $# -gt 0 ]]; do
   case "$1" in
   "-c" | "--config")
