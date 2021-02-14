@@ -82,7 +82,19 @@ function wait_for_enter() {
 }
 
 #------------------------------------------------------------------------------
-# Intro
+# Error control and Clean Up
+# Used for error handling, so script calls its self if its planning to run anything
+function clean_up() {
+  RESULT="$?"
+
+  if [[ $RESULT != '0' ]]; then
+    echo -e "\e${FONTFAIL}Oh no \e${FONTFACE}😭 \e${FONTFAIL}, failed with status $RESULT\e[0m" >>/dev/stderr
+    exit $RESULT
+  else
+    echo -e "\e${FONTOK}Setup Successful \e${FONTFACE}😊\e[0m"
+    exit $RESULT
+  fi
+}
 
 function link_file() {
   local src=$1 dst=$2
@@ -280,7 +292,7 @@ function setup_os() {
     prompt_line_yn "Would you like to proceed with the linux specifc setup?"
     if [[ $line =~ 'y' ]]; then
       info "Running a routine software update before we kick off with the good stuff"
-      sudo $DOTFILES_ROOT/ubuntu/update.sh 2>&1
+      sudo $DOTFILES_ROOT/os/ubuntu/update.sh 2>&1
 
       echo " "
       info "Would you like to use zsh over bash as your default shell?"
@@ -299,7 +311,7 @@ function setup_os() {
         USING_ZSH=false
         info "We shall just stick with bash then"
       fi
-      sudo $DOTFILES_ROOT/ubuntu/ubuntuInstall.sh 2>&1
+      sudo $DOTFILES_ROOT/os/ubuntu/ubuntuInstall.sh 2>&1
     fi
   elif [[ "$OSTYPE" == "darwin"* ]]; then #macOS
     info "MacOS, solid, good choice my friend"
@@ -308,9 +320,9 @@ function setup_os() {
 
     if [[ $line =~ 'y' ]]; then
       info "Setting default settings"
-      $DOTFILES_ROOT/macos/set-defaults.sh 2>&1
+      $DOTFILES_ROOT/os/macos/set-defaults.sh 2>&1
       info "Installing default software and iTerm terminal"
-      $DOTFILES_ROOT/macos/macInstall.sh 2>&1
+      $DOTFILES_ROOT/os/macos/macInstall.sh 2>&1
       info "Configuring home brew"
       $DOTFILES_ROOT/homebrew/installBrew.sh 2>&1
     fi
@@ -341,7 +353,7 @@ function setup_zsh() {
 
       info "You can change this manually after running 'p10k configure'"
       user "Would you like to use a default .p10k.zsh with a default configuration?"
-      user "It is recommended you configure your own, as this will automatically install the appropriate fonts on your behalf"
+      user "It is recommended you configure your own, as this will automatically install the appropriate fonts on your behalf if you have not done so"
 
       action=''
       while [[ $action != 'configure' ]] && [[ $action != 'auto' ]]; do
@@ -352,11 +364,12 @@ function setup_zsh() {
       [[ -f $HOME/.p10k.zsh ]] || rm $HOME/.p10k.zsh
       [[ -f $$DOTFILES_ROOT/zsh/p10k.zsh.symlink/.p10k.zsh ]] || rm $DOTFILES_ROOT/zsh/p10k.zsh.symlink/.p10k.zsh
 
-      if [[ $action = 'configure' ]]; then # Copy existing key
-        p10k configure
-        cp "$HOME/.p10k.zsh" "$DOTFILES_ROOT/zsh/p10k.zsh.symlink"
-        rm "$HOME/.p10k.zsh"
-      elif [[ $action = 'auto' ]]; then # Generate new key
+      if [[ $action = 'configure' ]]; then
+        # info "it is recommended that you run: p10k configure"
+        # cp "$HOME/.p10k.zsh" "$DOTFILES_ROOT/zsh/p10k.zsh.symlink"
+        # rm "$HOME/.p10k.zsh"
+        $DOTFILES_ROOT/zsh/configurep10k.sh
+      elif [[ $action = 'auto' ]]; then
         if [ "$(uname -s)" == "Darwin" ]; then
           cp "$DOTFILES_ROOT/zsh/p10kdesigns/macos.zsh" "$DOTFILES_ROOT/zsh/.p10k.zsh.symlink"
         else
@@ -489,6 +502,12 @@ function setup_default_editor() {
   fi
 }
 
+function update_configuration() {
+  begin_step "Update Software and Dotfiles Configuration "
+
+  warning "Sorry, updating of exsisting setup still needs to be coded up"
+}
+
 #---------------------------------------------------------------------------------------------------------------------
 # Run functions
 
@@ -499,30 +518,103 @@ function displayUsageAndExit() {
   echo "Usage: dot [options]"
   echo ""
   echo "Options:"
-  echo "  -e, --edit    Open dotfiles directory for editing"
-  echo "  -h, --help    Show this help message and exit"
+  echo "  -c, --config          Using a config file for setup is an incoming feature"
+  echo "  -e, --edit            Open dotfiles directory for editing"
+  echo "  -h, --help            Show this help message and exit"
+  echo "  -i, --interactive     Choose specific setups to run"
+  echo "  -u, --update          Update previously installed configuration"
+  exit
+}
+
+function specific_choice() {
+  begin_step "Choose a setup to run"
+  echo "Avalaible setup configurations: "
+
+  function choose() {
+    prompt_line " which would you like to setup"
+
+    case $line in
+    "1")
+      exit
+      ;;
+    "2")
+      update_software
+      ;;
+    "3")
+      setup_git
+      ;;
+    "4")
+      setup_dotfiles
+      ;;
+    "5")
+      setup_os
+      ;;
+    "6")
+      setup_software
+      ;;
+    "7")
+      setup_zsh
+      ;;
+    "8")
+      setup_ssh_keys
+      ;;
+    "9")
+      setup_default_editor
+      ;;
+    *)
+      echo "Please pick for the the possible setup configurations: "
+      choose
+      ;;
+    esac
+  }
+
+  while [[ $line != 'exit' ]]; do
+    echo " 1 - exit "
+    echo " 2 - update "
+    echo " 3 - git "
+    echo " 4 - dotfiles "
+    echo " 5 - os "
+    echo " 6 - software "
+    echo " 7 - zsh "
+    echo " 8 - ssh_ke565s "
+    echo " 9 - default_editor "
+
+    choose
+
+    prompt_line_yn "Would you like to run another setup"
+    if [[ $line =~ 'n' ]]; then
+      exit
+    fi
+  done
+}
+
+function config_file() {
+  warning "using a config file for setup is an incoming feature"
+  echo "For now, just love the command line and everything it gives you"
   exit
 }
 
 #------------------------------------------------------------------------------
 # Parse args
+trap clean_up EXIT
+zsh p10k configure
 while [[ $# -gt 0 ]]; do
   case "$1" in
-  "-r" | "--run")
-    RUN="1"
-    ;;
   "-c" | "--config")
-    warning "using a config file for setup is an incoming feature"
-    echo "For now, just love the command line and everything it gives you"
-    exit
+    config_file
     ;;
   "-e" | "--edit")
     exec "$EDITOR" "$dotfilesDirectory"
     exit
     ;;
+  "-i" | "--interactive")
+    specific_choice
+    ;;
   "-h" | "--help")
     displayUsageAndExit
     ;;
+  "-u" | "--update") ;;
+
   *)
     echo "Unknown arg: $1" >>/dev/stderr
     displayUsageAndExit
@@ -530,19 +622,6 @@ while [[ $# -gt 0 ]]; do
   esac
   shift
 done
-
-# Used for error handling, so script calls its self if its planning to run anything
-if [[ $RUN = '0' ]]; then
-  ./letsgo.sh --run
-  RESULT="$?"
-  if [[ $RESULT != '0' ]]; then
-    echo -e "\e${FONTFAIL}Oh no \e${FONTFACE}😭 \e${FONTFAIL}... failed with status $RESULT\e[0m" >>/dev/stderr
-    exit $RESULT
-  else
-    echo -e "\e${FONTOK}Success! \e${FONTFACE}😊\e[0m"
-    exit $RESULT
-  fi
-fi
 
 echo ''
 

@@ -2,6 +2,6 @@ APT_NON_INTERACTIVE_OPTIONS=' -yq -o APT::Get::AllowUnauthenticated=yes -o Acqui
 
 echo "installing terminal terminator"
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS install terminator
-cp $HOME/.dotfiles/ubuntu/terminator/config $HOME/.config/terminator/config
+cp $HOME/.dotfiles/os/ubuntu/terminator/config $HOME/.config/terminator/config
 
 sudo snap install --classic code
