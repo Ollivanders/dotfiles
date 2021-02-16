@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# load a .env variables into current session
+# https://gist.github.com/mihow/9c7f559807069a03e302605691f85572 alex-ross
+
+local file=$([ -z "$1" ] && echo ".env" || echo ".env.$1")
+
+if [ -f $file ]; then
+  set -a
+  source $file
+  set +a
+else
+  echo "No $file file found" 1>&2
+  return 1
+fi

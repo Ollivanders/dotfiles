@@ -17,10 +17,26 @@ Your system crashes and a tear starts to trickle down your face at the prospect 
 - sudo apt-get install git
 
 git clone https://github.com/Ollivanders/dotfiles.git
+./letsgo -h 
+
 
 - Make sure zsh is installed and configured
 - Clone the project where ever
 - run script/bootstrap
+
+```
+letsgo -- entry point for dotfile management
+  for all your dotfiling needs
+
+Usage: dot [options]
+
+Options:
+  -c, --config          Using a config file for setup is an incoming feature
+  -e, --edit            Open dotfiles directory for editing
+  -h, --help            Show this help message and exit
+  -i, --interactive     Choose specific setups to run
+  -u, --update          Update previously installed configuration
+```
 
 ## Things to change
 
