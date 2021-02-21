@@ -8,3 +8,7 @@ then
   alias ll="gls -l --color"
   alias la='gls -A --color'
 fi
+
+alias copyLast='fc -ln -1 | awk '{$1=$1}1' | copy'
+
+alias chm "chmod 777 "

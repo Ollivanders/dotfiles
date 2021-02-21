@@ -148,6 +148,4 @@ alias reload="exec ${SHELL} -l"
 alias path='echo -e ${PATH//:/\\n}'
 
 alias pp='python3'
-
-alias sagu='sudo apt-getr update -y && sudo apt-get upgrade -y'
 alias gh='history
