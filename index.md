@@ -1,37 +1,21 @@
-## Welcome to GitHub Pages
+# The Dankest Dotfiles
 
-You can use the [editor on GitHub](https://github.com/Ollivanders/dotfiles/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Many of us have tapped into the chaotic good energy created from custom preferences, however keeping these bad bois consistent and shared between your work setups, virtual machines, raspberry pi, macbook pro with enhanced graphics and the computer that you let your cat borrow in exchange for him doing the washing up, is not only challenging but damn complicated and frustrating when you can't rely on muscle memory. So here collected, is a ubuntu/mac advanced developer setup.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Your system crashes and a tear starts to trickle down your face at the prospect of setting up your system again. Swipe that misery away, reinstall from here and you will be living the dream once again.
 
-### Markdown
+# Description and Features
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- Installation organised by application/OS
+- \*.symlink will be symlinked to your home directory
+- anything titled "install.sh" will be run on start up
+- Configures with Windows (Poweline still experimental but full WSL support), MacOS and Ubuntu
+# Dotfile setup
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+sudo apt-get install git # if needed
+git clone https://github.com/Ollivanders/dotfiles.git
+./letsgo
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Ollivanders/dotfiles/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+If you have any troubles, read through: [a relative link][./troubleshooting.md]
