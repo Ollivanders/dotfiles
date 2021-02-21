@@ -43,6 +43,5 @@ alias gf='git fetch --all'
 
 alias grao='git remote add origin'
 alias gac='git add . && git commit -am'
-alias gacp='git add . && git commit -am && git push'
 alias gpushitgood='git push -u origin --all'
 alias gundo-commit='git reset --soft HEAD-1'

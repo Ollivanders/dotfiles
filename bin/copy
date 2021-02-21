@@ -9,6 +9,8 @@
 # cat test.txt | copy
 ##############
 
+set -euo pipefail
+
 COMMAND=""
 if [ -p /dev/stdin ]; then
     # echo "Data was piped to this script!"

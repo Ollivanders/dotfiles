@@ -10,13 +10,13 @@ if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
     sudo apt-get $APT_NON_INTERACTIVE_OPTIONS install zsh
     zsh --version
     sudo chsh -s $(which zsh) $USER
+    sudo -u root chsh -s $(which zsh)
 elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
     brew install zsh
 else
     echo "Sorry ${OSTYPE} unsupported"
     exit 0
 fi
-
 
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS update
 

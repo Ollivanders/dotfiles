@@ -1,0 +1,8 @@
+#!/bin/sh
+# 
+# git update submodules
+
+set -euo pipefail
+
+git submodule update --init --recursive
+git submodule update --recursive --remote

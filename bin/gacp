@@ -2,6 +2,8 @@
 # git add commit push
 # git add all, commit and push
 
+echo "here"
+
 git add .
 git commit -m "${1}"
 git push
