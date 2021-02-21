@@ -261,6 +261,30 @@ function setup_dotfiles() {
   else
     echo "We shall skip over those then..."
   fi
+
+  echo "If you setup a projects directory, you can c [tab] into it from anywhere "
+  prompt_line_yn "Would you like to setup a projects directory?"
+  if [[ $line =~ 'y' ]]; then
+      projects_dir="${HOME}/Documents/Projects"
+      prompt_line_yn "Is ${projects_dir} okay as the project path?"
+      if [[ $line =~ 'y' ]]; then
+        done=true
+      else  
+        done=false
+        while [ $done = false ]; do
+            line="_[]"
+            while [[ ! -d $line ]]; do
+              prompt_line_yn "Please specific Project Dir as a evaluative path"
+              projects_dir=$line
+            done
+            prompt_line_yn "Is ${projects_dir} okay as the project path?"
+            if [[ $line =~ 'y' ]]; then
+              done=true
+            fi
+        done
+      fi
+    echo "" > "export PROJECTS_DIR={projects_dir}"
+  fi
 }
 
 #------------------------------------------------------------------------------
@@ -515,7 +539,7 @@ function displayUsageAndExit() {
   echo "letsgo -- entry point for dotfile management"
   echo "  for all your dotfiling needs"
   echo ""
-  echo "Usage: dot [options]"
+  echo "Usage: dot/letsgo.sh [options] (dot is a global function after inital setup)" 
   echo ""
   echo "Options:"
   echo "  -c, --config          Using a config file for setup is an incoming feature"

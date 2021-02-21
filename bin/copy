@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#
+# Script for copying anything to the clipboard for each OS
+
+############## USE
+# Proceed any command with copy and its stdout will be piped to the clipboard
+# copy cat.txt 
+# or
+# cat test.txt | copy
+##############
+
+COMMAND=""
+if [ -p /dev/stdin ]; then
+    # echo "Data was piped to this script!"
+    IFS=
+    COMMAND="echo '$(cat)'"
+else
+    # echo "No input was found on stdin, skipping!"
+    # Checking to ensure a filename was specified and that it exists
+    COMMAND="$@"
+fi
+
+if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
+    if grep -q Microsoft /proc/version; then
+        clip.exe | eval $COMMAND
+    else
+        eval $COMMAND | xclip
+    fi
+elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
+    eval $COMMAND | pbcopy
+else
+    echo "Sorry ${OSTYPE} unsupported"
+    exit 0
+fi
+
+echo 'Copied =>'
+echo $(eval $COMMAND)
+

@@ -12,23 +12,18 @@ Your system crashes and a tear starts to trickle down your face at the prospect 
 
 # Dotfile setup
 
-- will prompt install on mac
-- git --version
-- sudo apt-get install git
-
+```
+sudo apt-get install git # if needed
 git clone https://github.com/Ollivanders/dotfiles.git
-./letsgo -h 
+./letsgo
+```
 
-
-- Make sure zsh is installed and configured
-- Clone the project where ever
-- run script/bootstrap
 
 ```
 letsgo -- entry point for dotfile management
   for all your dotfiling needs
 
-Usage: dot [options]
+Usage: dot/letsgo.sh [options] (dot is a global function after inital setup)
 
 Options:
   -c, --config          Using a config file for setup is an incoming feature
@@ -37,27 +32,6 @@ Options:
   -i, --interactive     Choose specific setups to run
   -u, --update          Update previously installed configuration
 ```
-
-## Things to change
-
-- _export PROJECTS=~/GoogleDrive/Projects_, line 15 in _zsh/zshrc.symlink_, change to your projects directory
-
-# Features
-
-## Configure zsh on linux
-
-```
-sudo apt-get install zsh
-brew install zsh
-
-chsh -s /bin/zsh <user>
-chsh -s /bin/zsh root
-chsh -s /bin/zsh
-chsh -s $(which zsh)
-```
-
-# Issues
-
 ## oh-ny-zsh or powerline not present
 
 This means the git submodule has not been run and therefore the projects are not present
@@ -66,6 +40,8 @@ This means the git submodule has not been run and therefore the projects are not
 git submodule init
 git submodule update
 ```
+
+If t
 
 ## Compliant directories
 

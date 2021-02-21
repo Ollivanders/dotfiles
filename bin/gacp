@@ -1,0 +1,7 @@
+#!/bin/sh
+# git add commit push
+# git add all, commit and push
+
+git add .
+git commit -m "${1}"
+git push
