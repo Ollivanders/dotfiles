@@ -1,8 +1,8 @@
 #!/bin/sh
 
-README_FILE=./README.md
-INDEX_FILE=./index.md
-TROUBLESHOOTING_FILE=./troubleshooting.md
+README_FILE=../README.md
+INDEX_FILE=../index.md
+TROUBLESHOOTING_FILE=../troubleshooting.md
 
 # cd ..
 
@@ -32,6 +32,7 @@ printf "# Troubleshooting \n" >$TROUBLESHOOTING_FILE
 # $(printf "$(./letsgo.sh -h)") >> $TROUBLESHOOTING_FILE
 # printf "\`\`\`\n" >> $TROUBLESHOOTING_FILE
 
+write_to $TROUBLESHOOTING_FILE troubleshooting
 write_to $TROUBLESHOOTING_FILE todo
 
 # printf "# Git todo's \n" >>$TROUBLESHOOTING_FILE

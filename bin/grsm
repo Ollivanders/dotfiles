@@ -16,3 +16,4 @@ rm -rf .git/modules
 if [[ ${1} =~ "-all" ]]; then
     rm .gitmodules
 fi
+    

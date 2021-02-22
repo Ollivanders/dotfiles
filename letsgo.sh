@@ -283,7 +283,7 @@ function setup_dotfiles() {
             fi
         done
       fi
-    echo "" > "export PROJECTS_DIR={projects_dir}"
+    echo "export PROJECTS_DIR=${projects_dir}" > system/env.zsh
   fi
 }
 
@@ -527,9 +527,27 @@ function setup_default_editor() {
 }
 
 function update_configuration() {
-  begin_step "Update Software and Dotfiles Configuration "
+  begin_step "Update Software and Dotfiles Configuration"
+  
+  setup_dotfiles
+  setup_software
+  setup_os
+  # if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
+  #     # info "Setting default settings"
+  #     # $DOTFILES_ROOT/os/macos/set-defaults.sh 2>&1
+  #     # info "Installing default software and iTerm terminal"
+  #     # $DOTFILES_ROOT/os/macos/macInstall.sh 2>&1
+  #     # info "Configuring home brew"
+  #     # $DOTFILES_ROOT/homebrew/installBrew.sh 2>&1
+  # elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
+  #   # ./bin/sagu # run apt package upgrades
 
-  warning "Sorry, updating of exsisting setup still needs to be coded up"
+  # else
+  #     echo "Sorry ${OSTYPE} unsupported"
+  #     exit 0
+  # fi
+
+  # warning "Sorry, updating of exsisting setup still needs to be coded up"
 }
 
 #---------------------------------------------------------------------------------------------------------------------
@@ -636,8 +654,9 @@ while [[ $# -gt 0 ]]; do
   "-h" | "--help")
     displayUsageAndExit
     ;;
-  "-u" | "--update") ;;
-
+  "-u" | "--update") 
+    update_configuration
+    ;;
   *)
     echo "Unknown arg: $1" >>/dev/stderr
     displayUsageAndExit

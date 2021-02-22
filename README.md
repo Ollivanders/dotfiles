@@ -9,7 +9,7 @@ Your system crashes and a tear starts to trickle down your face at the prospect 
 - Installation organised by application/OS
 - \*.symlink will be symlinked to your home directory
 - anything titled "install.sh" will be run on start up
-- Configures with Windows (Poweline still experimental but full WSL support), MacOS and Ubuntu
+- Configures with Windows (Powerline still experimental but full WSL support), MacOS and Ubuntu
 # Dotfile setup
 
 ```
@@ -19,7 +19,6 @@ git clone https://github.com/Ollivanders/dotfiles.git
 ```
 
 If you have any troubles, read through: [a relative link][./troubleshooting.md]
-
 # To do
 
 With an ever morphing world, the number of potential contexts installation that could be called from increases as with the ambition of this collection. Multiple private versions of this dotfiles exist for different levels of config (simple setup of aliases only vs full ohmyzzsh configuration), so working is taking place to move this into one unified set. Therefore for now, problems in niche examples are too be expected as streamlining takes place.
@@ -49,7 +48,6 @@ With an ever morphing world, the number of potential contexts installation that 
     - choice to only use bash and or ignore 
     - update all packages script simplify
     - config file with default responses to prompts in letsgo.sh 
-
 # Acknowledgments
 
 Original fork from https://github.com/holman/dotfiles
@@ -59,3 +57,4 @@ Inspiration and ideas taken from:
 - https://github.com/mathiasbynens/dotfiles/
 - https://github.com/paulirish/dotfile
 - https://github.com/alrra/dotfiles
+

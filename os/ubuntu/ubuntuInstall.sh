@@ -16,7 +16,9 @@ else
   echo "no chrome";
 fi
 
+# Paper icon config
 sudo add-apt-repository ppa:snwh/ppa
 sudo apt-get update
 sudo apt-get install paper-icon-theme
 
+# Configure background

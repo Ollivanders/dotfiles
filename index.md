@@ -9,7 +9,7 @@ Your system crashes and a tear starts to trickle down your face at the prospect 
 - Installation organised by application/OS
 - \*.symlink will be symlinked to your home directory
 - anything titled "install.sh" will be run on start up
-- Configures with Windows (Poweline still experimental but full WSL support), MacOS and Ubuntu
+- Configures with Windows (Powerline still experimental but full WSL support), MacOS and Ubuntu
 # Dotfile setup
 
 ```
