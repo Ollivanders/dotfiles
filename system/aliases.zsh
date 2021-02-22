@@ -41,4 +41,4 @@ alias dt="cd ~/Desktop"
 alias p="cd ~/Documents/Projects"
 alias ch="cd ~/"
 
-# TODO configure for bash as well (change system directory to .sh appens)
+# TODO configure for bash as well (change system directory to .sh or more gen)
