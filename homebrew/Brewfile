@@ -6,9 +6,6 @@
 brew "tmux"
 brew "zsh"
 brew "grep"
-brew "openssh"
-brew "php"
-brew "gmp"
 brew "bash"
 
 # vim tools
@@ -22,6 +19,7 @@ brew "the_silver_searcher"
 # Source Control Tools
 brew "hub"
 brew "tig"
+brew "duti"
 
 # keyboard tools
 # cask "karabiner-elements"
@@ -35,6 +33,9 @@ brew "pyenv"
 brew "pyenv-virtualenv"
 # brew "zlib" # needed for pyenv installing
 # brew "sqlite"
+
+# General
+cask "vlc"
 
 # Others ---------------------------------------------------------------------------
 

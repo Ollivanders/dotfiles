@@ -1,11 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/local/bin/zsh
 #
 # Downloads and configures iterm and updates base software
-
 
 if test ! "$(uname)" = "Darwin"; then
   exit 0
 fi
+
+# TODO Configure adding automator and scripts
 
 cp -R ~/.dotfiles/macos/automator/Services/ ~/Library/Services/
 

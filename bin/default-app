@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# sets the default app for an extension <app> <ext>
+
+set -euo pipefail
+
+if [[ "$OSTYPE" =~ "darwin"* ]]; then # Linux
+  duti -s $(osascript -e 'id of app "$1"') $2 all
+elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
+  echo "Sorry ${OSTYPE} unsupported"
+  exit 0
+else
+  echo "Sorry ${OSTYPE} unsupported"
+  exit 0
+fi

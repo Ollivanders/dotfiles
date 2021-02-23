@@ -877,21 +877,36 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 # defaults write org.m0k.transmission RandomPort -bool true
 
 ###############################################################################
+# Default applications for .ext                                               #
+###############################################################################
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
+function default_app (){
+	duti -s $(osascript -e 'id of app "$1"') $2 all
+}
+
+# browser
+# mail app
+
+default_app "Arduino" ".ino"
+
+default_app "Visual Studio Code" ".json"
+default_app "Visual Studio Code" ".txt"
+default_app "Visual Studio Code" ".js"
+default_app "Visual Studio Code" ".py"
+default_app "Visual Studio Code" ".md"
 
 for app in "Activity Monitor" \
 	"Address Book" \
 	"Calendar" \
-	"cfprefsd" \
 	"Contacts" \
 	"Dock" \
 	"Finder" \
-	"Google Chrome Canary" \
 	"Google Chrome" \
 	"Mail" \
 	"Messages" \
-	"Opera" \
 	"Photos" \
 	"Safari" \
 	"Terminal" \

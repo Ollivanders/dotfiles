@@ -8,4 +8,3 @@ export DEBIAN_FRONTEND=noninteractive
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS update
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS upgrade
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS autoremove
-sudo apt-get $APT_NON_INTERACTIVE_OPTIONS clean

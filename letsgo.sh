@@ -33,7 +33,7 @@ function begin_step() {
 }
 
 function info() {
-  printf "\r  [ \033[00;34m...\033[0m ] $1\n"
+  printf "\r  [ \033[00;34m$1\033[0m ] $2\n"
 }
 
 function warning() {
@@ -205,7 +205,7 @@ function setup_git() {
     line='n'
     while [[ ! $line =~ 'y' ]]; do
       echo "Noice, lets do it:"
-      info 'setup gitconfig'
+      info "setup" 'gitconfig'
 
       git_credential='cache'
       if [[ "$OSTYPE" == "darwin"* ]]; then #macOS
@@ -236,23 +236,23 @@ function setup_git() {
 
 #------------------------------------------------------------------------------
 # Install dotfiles
+function install_dotfiles() {
+  local overwrite_all=false backup_all=false skip_all=false
+
+  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*'); do
+    dst="$HOME/.$(basename "${src%.*}")"
+    link_file "$src" "$dst"
+  done
+
+  if [[ ! -d $HOME/.dotfiles ]]; then
+    link_file "$DOTFILES_ROOT" "$HOME/.dotfiles"
+  fi
+}
+
 function setup_dotfiles() {
   begin_step 'Setting up dotfiles'
 
   echo "Now we are going to symlink on your config files to this directory"
-
-  function install_dotfiles() {
-    local overwrite_all=false backup_all=false skip_all=false
-
-    for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*'); do
-      dst="$HOME/.$(basename "${src%.*}")"
-      link_file "$src" "$dst"
-    done
-
-    if [[ ! -d $HOME/.dotfiles ]]; then
-      link_file "$DOTFILES_ROOT" "$HOME/.dotfiles"
-    fi
-  }
 
   prompt_line_yn "Would you like to symlink these files?"
 
@@ -265,30 +265,38 @@ function setup_dotfiles() {
   echo "If you setup a projects directory, you can c [tab] into it from anywhere "
   prompt_line_yn "Would you like to setup a projects directory?"
   if [[ $line =~ 'y' ]]; then
-      projects_dir="${HOME}/Documents/Projects"
-      prompt_line_yn "Is ${projects_dir} okay as the project path?"
-      if [[ $line =~ 'y' ]]; then
-        done=true
-      else  
-        done=false
-        while [ $done = false ]; do
-            line="_[]"
-            while [[ ! -d $line ]]; do
-              prompt_line_yn "Please specific Project Dir as a evaluative path"
-              projects_dir=$line
-            done
-            prompt_line_yn "Is ${projects_dir} okay as the project path?"
-            if [[ $line =~ 'y' ]]; then
-              done=true
-            fi
+    projects_dir="${HOME}/Documents/Projects"
+    prompt_line_yn "Is ${projects_dir} okay as the project path?"
+    if [[ $line =~ 'y' ]]; then
+      done=true
+    else
+      done=false
+      while [ $done = false ]; do
+        line="_[]"
+        while [[ ! -d $line ]]; do
+          prompt_line_yn "Please specific Project Dir as a evaluative path"
+          projects_dir=$line
         done
-      fi
-    echo "export PROJECTS_DIR=${projects_dir}" > system/env.zsh
+        prompt_line_yn "Is ${projects_dir} okay as the project path?"
+        if [[ $line =~ 'y' ]]; then
+          done=true
+        fi
+      done
+    fi
+    echo "export PROJECTS_DIR=${projects_dir}" >system/env.zsh
   fi
 }
 
 #------------------------------------------------------------------------------
 # Install software
+function install_software() {
+  if source $DOTFILES_ROOT/script/install.sh | while read -r data; do info "Installing" "$data"; done; then
+    success "modules installed"
+  else
+    fail "error installing modules"
+  fi
+}
+
 function setup_software() {
   begin_step "Installing all prescribed modules"
 
@@ -297,16 +305,25 @@ function setup_software() {
   prompt_line_yn "Would you like to do this?"
 
   if [[ $line =~ 'y' ]]; then
-    if source $DOTFILES_ROOT/script/install.sh | while read -r data; do info "$data"; done; then
-      success "modules installed"
-    else
-      fail "error installing modules"
-    fi
+    install_software
   fi
 }
 
 #------------------------------------------------------------------------------
 # OS individual install
+function setup_mac() {
+  info "Setting" "default settings"
+  $DOTFILES_ROOT/os/macos/set-defaults.sh 2>&1
+  info "Installing" "default software and iTerm terminal"
+  $DOTFILES_ROOT/os/macos/macInstall.sh 2>&1
+  info "Configuring" "home brew"
+  $DOTFILES_ROOT/homebrew/installBrew.sh 2>&1
+}
+
+function setup_ubuntu() {
+  $DOTFILES_ROOT/os/ubuntu/ubuntuInstall.sh 2>&1
+}
+
 function setup_os() {
   begin_step 'OS specific setup'
 
@@ -315,11 +332,11 @@ function setup_os() {
 
     prompt_line_yn "Would you like to proceed with the linux specifc setup?"
     if [[ $line =~ 'y' ]]; then
-      info "Running a routine software update before we kick off with the good stuff"
+      info "Update" "before we kick off with the good stuff"
       sudo $DOTFILES_ROOT/os/ubuntu/update.sh 2>&1
 
       echo " "
-      info "Would you like to use zsh over bash as your default shell?"
+      info "zsh>bash" "Would you like to use zsh over bash as your default shell?"
       echo "Reasons to do this are as follows:"
       echo "-ZSH is built off Bash but made better and not in the 80s"
       echo "-its soo much faster, like comparing the Batmobile to a mobility scooter"
@@ -328,27 +345,26 @@ function setup_os() {
       prompt_line_yn "Have you been conviced???"
 
       if [[ $line =~ 'y' ]]; then
-        info "Noice, lets get zsh setup and installed"
+        info "Noice" "lets get zsh setup and installed"
         $DOTFILES_ROOT/zsh/installZSH.sh 2>&1
-        info "Please remeber to logout and back in again for this to work"
+        info "Note" "logout and back in again for this to work"
       else
         USING_ZSH=false
-        info "We shall just stick with bash then"
+        info "bash :(" "We shall just stick with bash then"
       fi
-      sudo $DOTFILES_ROOT/os/ubuntu/ubuntuInstall.sh 2>&1
+      prompt_line_yn "Would you like to proceed with the Ubuntu specifc setup, this includes alerations to your default settings which will not be saved!!!!!!!!!!?"
+
+      if [[ $line =~ 'y' ]]; then
+        setup_ubuntu
+      fi
     fi
   elif [[ "$OSTYPE" == "darwin"* ]]; then #macOS
-    info "MacOS, solid, good choice my friend"
+    info "MacOS" "solid, good choice my friend"
 
     prompt_line_yn "Would you like to proceed with the macOS specifc setup, this includes alerations to your default settings which will not be saved!!!!!!!!!!?"
 
     if [[ $line =~ 'y' ]]; then
-      info "Setting default settings"
-      $DOTFILES_ROOT/os/macos/set-defaults.sh 2>&1
-      info "Installing default software and iTerm terminal"
-      $DOTFILES_ROOT/os/macos/macInstall.sh 2>&1
-      info "Configuring home brew"
-      $DOTFILES_ROOT/homebrew/installBrew.sh 2>&1
+      setup_mac
     fi
 
   elif [[ "$OSTYPE" == "win"* ]]; then # Wins (what are you doing)
@@ -375,7 +391,7 @@ function setup_zsh() {
       git submodule update
       [[ ! -d $HOME/.oh-my-zsh ]] || link_file "$DOTFILES_ROOT/zsh/ohmyzsh" "$HOME/.oh-my-zsh"
 
-      info "You can change this manually after running 'p10k configure'"
+      info "change" "manually after running 'p10k configure'"
       user "Would you like to use a default .p10k.zsh with a default configuration?"
       user "It is recommended you configure your own, as this will automatically install the appropriate fonts on your behalf if you have not done so"
 
@@ -410,7 +426,7 @@ function setup_zsh() {
 function setup_ssh_keys() {
   begin_step 'SSH key'
   echo "Let's set up the SSH public and private keys ."
-  echo
+  prompt_line_yn "Would you like to do this?"
 
   if [[ $line =~ 'y' ]]; then
     echo "I can generate new keys, or you can copy existing keys from the"
@@ -459,7 +475,7 @@ function setup_ssh_keys() {
       echo -e "Host bitbucket.org\n ControlMaster yes\n IdentityFile ~/.ssh/id_rsa" >"${sshconfig}"
     fi
 
-    info "You can copy this ssh key to your clipboard with the 'pubkey' function, located in bin/"
+    info "Note" "You can copy this ssh key to your clipboard with the 'pubkey' function, located in bin/"
   fi
 }
 
@@ -528,26 +544,27 @@ function setup_default_editor() {
 
 function update_configuration() {
   begin_step "Update Software and Dotfiles Configuration"
-  
-  setup_dotfiles
-  setup_software
-  setup_os
-  # if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
-  #     # info "Setting default settings"
-  #     # $DOTFILES_ROOT/os/macos/set-defaults.sh 2>&1
-  #     # info "Installing default software and iTerm terminal"
-  #     # $DOTFILES_ROOT/os/macos/macInstall.sh 2>&1
-  #     # info "Configuring home brew"
-  #     # $DOTFILES_ROOT/homebrew/installBrew.sh 2>&1
-  # elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
-  #   # ./bin/sagu # run apt package upgrades
 
-  # else
-  #     echo "Sorry ${OSTYPE} unsupported"
-  #     exit 0
-  # fi
+  info "Update" "dotfiles repo from remote version"
+  cd ${DOTFILES_ROOT}
+  git config pull.rebase false
+  git pull
 
-  # warning "Sorry, updating of exsisting setup still needs to be coded up"
+  install_dotfiles
+  install_software
+
+  # setup_os
+  if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
+    setup_ubuntu
+  elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
+    setup_mac
+  else
+    echo "Sorry ${OSTYPE} unsupported"
+    exit 0
+  fi
+
+  info "All updated" "now crack on with it"
+  exit
 }
 
 #---------------------------------------------------------------------------------------------------------------------
@@ -557,10 +574,10 @@ function displayUsageAndExit() {
   echo "letsgo -- entry point for dotfile management"
   echo "  for all your dotfiling needs"
   echo ""
-  echo "Usage: dot/letsgo.sh [options] (dot is a global function after inital setup)" 
+  echo "Usage: <dot,letsgo.sh> [options] (dot is a global function after inital setup)"
   echo ""
   echo "Options:"
-  echo "  -c, --config          Using a config file for setup is an incoming feature"
+  # echo "  -c, --config          Using a config file for setup is an incoming feature"
   echo "  -e, --edit            Open dotfiles directory for editing"
   echo "  -h, --help            Show this help message and exit"
   echo "  -i, --interactive     Choose specific setups to run"
@@ -630,20 +647,11 @@ function specific_choice() {
   done
 }
 
-function config_file() {
-  warning "using a config file for setup is an incoming feature"
-  echo "For now, just love the command line and everything it gives you"
-  exit
-}
-
 #------------------------------------------------------------------------------
 # Parse args
 trap clean_up EXIT
 while [[ $# -gt 0 ]]; do
   case "$1" in
-  "-c" | "--config")
-    config_file
-    ;;
   "-e" | "--edit")
     exec "$EDITOR" "$dotfilesDirectory"
     exit
@@ -654,7 +662,7 @@ while [[ $# -gt 0 ]]; do
   "-h" | "--help")
     displayUsageAndExit
     ;;
-  "-u" | "--update") 
+  "-u" | "--update")
     update_configuration
     ;;
   *)
