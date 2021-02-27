@@ -264,6 +264,7 @@ function setup_dotfiles() {
 
   echo "If you setup a projects directory, you can c [tab] into it from anywhere "
   prompt_line_yn "Would you like to setup a projects directory?"
+  # TODO fix
   if [[ $line =~ 'y' ]]; then
     projects_dir="${HOME}/Documents/Projects"
     prompt_line_yn "Is ${projects_dir} okay as the project path?"
@@ -389,7 +390,9 @@ function setup_zsh() {
       echo "Hang tight while we install some external libraries"
       git submodule init
       git submodule update
-      [[ ! -d $HOME/.oh-my-zsh ]] || link_file "$DOTFILES_ROOT/zsh/ohmyzsh" "$HOME/.oh-my-zsh"
+      if [[ -d $HOME/.oh-my-zsh ]]; then
+        link_file "$DOTFILES_ROOT/zsh/ohmyzsh" "$HOME/.oh-my-zsh"
+      fi
 
       info "change" "manually after running 'p10k configure'"
       user "Would you like to use a default .p10k.zsh with a default configuration?"
@@ -401,8 +404,13 @@ function setup_zsh() {
         action=$line
       done
 
-      [[ -f $HOME/.p10k.zsh ]] || rm $HOME/.p10k.zsh
-      [[ -f $$DOTFILES_ROOT/zsh/p10k.zsh.symlink/.p10k.zsh ]] || rm $DOTFILES_ROOT/zsh/p10k.zsh.symlink/.p10k.zsh
+      if [[ -f $HOME/.p10k.zsh ]]; then
+        rm $HOME/.p10k.zsh
+      fi
+
+      if [[ -f $$DOTFILES_ROOT/zsh/p10k.zsh.symlink/.p10k.zsh ]]; then
+        rm $DOTFILES_ROOT/zsh/p10k.zsh.symlink/.p10k.zsh
+      fi
 
       if [[ $action = 'configure' ]]; then
         # info "it is recommended that you run: p10k configure"

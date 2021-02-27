@@ -36,7 +36,7 @@ brew "pyenv-virtualenv"
 
 # General
 cask "vlc"
-
+cask "quicksilver"
 # Others ---------------------------------------------------------------------------
 
 #  font tools.

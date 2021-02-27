@@ -23,10 +23,11 @@ mousetrack on
 
 # default windows
 screen -t Shell1  1 zsh
-screen -t Shell2  2 zsh
-screen -t Python  3 python3
-screen -t Media   4 zsh
-screen -t Bash    5 bash
+screen -t Shell2  2 remote1
+screen -t Shell2  3 remote2
+screen -t Python  4 python3
+screen -t Media   5 zsh
+screen -t Bash    6 bash
 
 select 0
 bind c screen 1 # window numbering starts at 1 not 0
