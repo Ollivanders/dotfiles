@@ -266,7 +266,7 @@ function setup_dotfiles() {
   prompt_line_yn "Would you like to setup a projects directory?"
   # TODO fix
   if [[ $line =~ 'y' ]]; then
-    projects_dir="${HOME}/Documents/Projects"
+    projects_dir="${HOME}/Documents/projects"
     prompt_line_yn "Is ${projects_dir} okay as the project path?"
     if [[ $line =~ 'y' ]]; then
       done=true
@@ -274,7 +274,7 @@ function setup_dotfiles() {
       done=false
       while [ $done = false ]; do
         line="_[]"
-        while [[ ! -d $line ]]; do
+        while [[ ! -d $projects_dir ]]; do
           prompt_line "Please specific Project Dir as a evaluative path"
           projects_dir=$line
         done
@@ -661,7 +661,12 @@ trap clean_up EXIT
 while [[ $# -gt 0 ]]; do
   case "$1" in
   "-e" | "--edit")
-    exec "$EDITOR" "$dotfilesDirectory"
+    letsgo_file="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+    if [[ $EDITOR = "" ]]; then
+      exec "$EDITOR" "$letsgo_file"
+    else
+      exec "code" "$letsgo_file"
+    fi
     exit
     ;;
   "-i" | "--interactive")

@@ -80,9 +80,11 @@ With an ever morphing world, the number of potential contexts installation that 
   - automatic font installation
 
 - Main setup and handling
+
   - improved print output control -> inform user of what is about to happen and give more warnings if dangerous, better colouring
   - update all packages script simplify
   - config file with default responses to prompts in letsgo.sh
+  - configure alerts and wallpapers automatically
 
 ### bash only config
 

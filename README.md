@@ -1,3 +1,5 @@
+<img src="./images/osSwirl.png" alt="drawing" style="width:300px;float: right"/>
+
 # The Dankest Dotfiles
 
 Many of us have tapped into the chaotic good energy created from custom preferences, however keeping these bad bois consistent and shared between your work setups, virtual machines, raspberry pi, macbook pro with enhanced graphics and the computer that you let your cat borrow in exchange for him doing the washing up, is not only challenging but damn complicated and frustrating when you can't rely on muscle memory. So here collected, is a ubuntu/mac advanced developer setup.
@@ -63,9 +65,11 @@ With an ever morphing world, the number of potential contexts installation that 
   - automatic font installation
 
 - Main setup and handling
+
   - improved print output control -> inform user of what is about to happen and give more warnings if dangerous, better colouring
   - update all packages script simplify
   - config file with default responses to prompts in letsgo.sh
+  - configure alerts and wallpapers automatically
 
 ### bash only config
 

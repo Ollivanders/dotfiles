@@ -32,6 +32,11 @@ With an ever morphing world, the number of potential contexts installation that 
   - config file with default responses to prompts in letsgo.sh
   - configure alerts and wallpapers automatically
 
+QUICK COMPLETELY AUTO SETUP FOR RPI AND VM MANAGEMENT <------------------------------->
+
+- uses bash
+- symlinks only
+
 ### bash only config
 
 ### quick setup
