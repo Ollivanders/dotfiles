@@ -28,6 +28,16 @@ Your system crashes and a tear starts to trickle down your face at the prospect 
   but still keep those autoloaded files in your home directory. These get
   symlinked in when you run `script/bootstrap`.
 
+
+# Plugins installed
+
+## ZSH
+
+## Alias finder
+
+## Syntax highlighting 
+
+## 
 # Dotfile setup
 
 ```

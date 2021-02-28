@@ -28,6 +28,16 @@ Your system crashes and a tear starts to trickle down your face at the prospect 
   but still keep those autoloaded files in your home directory. These get
   symlinked in when you run `script/bootstrap`.
 
+
+# Plugins installed
+
+## ZSH
+
+## Alias finder
+
+## Syntax highlighting 
+
+## 
 # Dotfile setup
 
 ```
@@ -70,6 +80,11 @@ With an ever morphing world, the number of potential contexts installation that 
   - update all packages script simplify
   - config file with default responses to prompts in letsgo.sh
   - configure alerts and wallpapers automatically
+
+QUICK COMPLETELY AUTO SETUP FOR RPI AND VM MANAGEMENT <------------------------------->
+
+- uses bash
+- symlinks only
 
 ### bash only config
 
