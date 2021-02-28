@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Sets reasonable macOS defaults.
 #
 # Or, in other words, set shit how I like in macOS.
@@ -7,7 +8,6 @@
 #
 # Run ./set-defaults.sh and you'll be good to go.
 
-#!/usr/bin/env bash
 
 # ~/.macos — https://mths.be/macos
 
@@ -32,6 +32,9 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 #sudo scutil --set HostName "0x6D746873"
 #sudo scutil --set LocalHostName "0x6D746873"
 #sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
+
+
+defaults write .GlobalPreferences com.apple.sound.beep.sound /System/Library/Sounds/Submarine.aiff
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "

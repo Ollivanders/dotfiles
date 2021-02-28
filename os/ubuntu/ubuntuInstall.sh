@@ -4,6 +4,9 @@ echo "installing terminal terminator"
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS install terminator
 cp $HOME/.dotfiles/os/ubuntu/terminator/config $HOME/.config/terminator/config
 
+##############################################################################
+# Applications
+##############################################################################
 sudo snap install --classic code
 
 # install chrome
@@ -16,9 +19,16 @@ else
   echo "no chrome";
 fi
 
+##############################################################################
+# Presentation
+##############################################################################
 # Paper icon config
 sudo add-apt-repository ppa:snwh/ppa
 sudo apt-get update
 sudo apt-get install paper-icon-theme
 
 # Configure background
+
+# Configure dock favourites
+
+# Configure 

@@ -1,12 +1,11 @@
 ##################
-# Global Aliases (zsh and bash) 
+# Global Aliases (zsh and bash)
 ##################
 
 # grc overides for ls
 #   Made possible through contributions from generous benefactors like
 #   `brew install coreutils`
-if $(gls &>/dev/null)
-then
+if $(gls &>/dev/null); then
   alias ls="gls -F --color"
   alias l="gls -lAh --color"
   alias ll="gls -l --color"
@@ -17,11 +16,11 @@ alias copyLast='fc -ln -1 | awk '{$1=$1}1' | copy'
 alias chm "chmod 777 "
 
 # Reload
-alias reload!='. ~/.zshrc' # reload zshrc file
+alias reload!='. ~/.zshrc'      # reload zshrc file
 alias reload="exec ${SHELL} -l" # restart shell
 
 # General
-alias cls='clear' 
+alias cls='clear'
 alias pp='python3'
 alias rf='rm -rf'
 
@@ -40,5 +39,5 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias p="cd ~/Documents/Projects"
 alias ch="cd ~/"
-
+alias cdot="cd $DOTFILES"
 # TODO configure for bash as well (change system directory to .sh or more gen)

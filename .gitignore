@@ -1,3 +1,4 @@
 git/gitconfig.local.symlink
 script/startUP.sh
 hooks
+docs/imageBoard.key

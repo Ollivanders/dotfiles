@@ -275,7 +275,7 @@ function setup_dotfiles() {
       while [ $done = false ]; do
         line="_[]"
         while [[ ! -d $line ]]; do
-          prompt_line_yn "Please specific Project Dir as a evaluative path"
+          prompt_line "Please specific Project Dir as a evaluative path"
           projects_dir=$line
         done
         prompt_line_yn "Is ${projects_dir} okay as the project path?"
