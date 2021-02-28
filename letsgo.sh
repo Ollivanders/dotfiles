@@ -268,22 +268,23 @@ function setup_dotfiles() {
   if [[ $line =~ 'y' ]]; then
     projects_dir="${HOME}/Documents/projects"
     prompt_line_yn "Is ${projects_dir} okay as the project path?"
+    done=false
     if [[ $line =~ 'y' ]]; then
       done=true
-    else
-      done=false
-      while [ $done = false ]; do
-        line="_[]"
-        while [[ ! -d $projects_dir ]]; do
-          prompt_line "Please specific Project Dir as a evaluative path"
-          projects_dir=$line
-        done
-        prompt_line_yn "Is ${projects_dir} okay as the project path?"
-        if [[ $line =~ 'y' ]]; then
-          done=true
-        fi
-      done
     fi
+    while [ $done = false ]; do
+      projects_dir="_[]"
+      prompt_line "Please specific Project Dir as a evaluative path"
+      projects_dir=$line
+      if [[ ! -d $projects_dir ]]; then
+        echo "The directory does not exist, it can be created for you"
+      fi
+      prompt_line_yn "Is ${projects_dir} okay as the project path?"
+      if [[ $line =~ 'y' ]]; then
+        done=true
+      fi
+    done
+    mkdir -p $projects_dir # make the directory if it does not exist
     echo "export PROJECTS_DIR=${projects_dir}" >system/env.zsh
   fi
 }

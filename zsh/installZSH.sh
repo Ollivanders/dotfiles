@@ -2,7 +2,9 @@
 #
 # Install zsh Debian, in the case where not automatically configured as default shell (depends on apt)
 
-APT_NON_INTERACTIVE_OPTIONS='DEBIAN_FRONTEND=noninteractive -yq -o APT::Get::AllowUnauthenticated=yes -o Acquire::Check-Valid-Until=false -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confmiss '
+export DEBIAN_FRONTEND=noninteractive 
+
+APT_NON_INTERACTIVE_OPTIONS='-yq -o APT::Get::AllowUnauthenticated=yes -o Acquire::Check-Valid-Until=false -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confmiss '
 
 echo "installing zsh"
 
