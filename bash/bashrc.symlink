@@ -3,7 +3,7 @@
 # for examples
 
 export DOTFILES=$HOME/.dotfiles
-source ${DOTFILES}/system/spec.sh
+bash source ${DOTFILES}/system/spec.sh
 
 # If not running interactively, don't do anything
 case $- in

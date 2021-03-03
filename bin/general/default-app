@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-if [[ "$OSTYPE" =~ "darwin"* ]]; then # Linux
+if [[ "$OSTYPE" =~    darwin"* ]]; then # Linux
   duti -s $(osascript -e 'id of app "$1"') $2 all
 elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
   echo "Sorry ${OSTYPE} unsupported"

@@ -6,6 +6,7 @@ Many of us have tapped into the chaotic good energy created from custom preferen
 
 Your system crashes and a tear starts to trickle down your face at the prospect of setting up your system again. Swipe that misery away, reinstall from here and you will be living the dream once again.
 
+note, these files are written for UNIX based systems, including WSL, Linux and MacOs
 # Description and Features
 
 - Installation organised by application/OS
