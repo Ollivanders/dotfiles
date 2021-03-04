@@ -1,0 +1,6 @@
+#!/bin/sh
+# git add all, ammend to preious message, push
+
+git add -A
+git commit --amend -C HEAD
+git push

@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-local file=$([ -z "$1" ] && echo ".env" || echo ".env.$1")
+file=$([ -z "$1" ] && echo ".env" || echo ".env.$1")
 
 if [ -f $file ]; then
   set -a

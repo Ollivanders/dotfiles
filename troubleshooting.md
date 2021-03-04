@@ -86,6 +86,8 @@ With an ever morphing world, the number of potential contexts installation that 
   - config file with default responses to prompts in letsgo.sh
   - configure alerts and wallpapers automatically
 
+  - speed up shell loading, shade plugins
+
 QUICK COMPLETELY AUTO SETUP FOR RPI AND VM MANAGEMENT <------------------------------->
 
 - uses bash
