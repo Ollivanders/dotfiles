@@ -3,4 +3,4 @@
 
 git add -A
 git commit --amend -C HEAD
-git push
+git push --force
