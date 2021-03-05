@@ -6,6 +6,6 @@
 # to make sure you're on the latest and greatest.
 # TODO: run letsgo, config file version for onky updates and installations, without full on user interface
 
-set -euo pipefail
+set -eu
 
 ~/.dotfiles/letsgo.sh "$@"

@@ -314,8 +314,6 @@ function setup_software() {
 #------------------------------------------------------------------------------
 # OS individual install
 function setup_mac() {
-  info "Setting" "default settings"
-  $DOTFILES_ROOT/os/macos/set-defaults.sh 2>&1
   info "Installing" "default software and iTerm terminal"
   $DOTFILES_ROOT/os/macos/macInstall.sh 2>&1
   info "Configuring" "home brew"
@@ -367,6 +365,8 @@ function setup_os() {
 
     if [[ $line =~ 'y' ]]; then
       setup_mac
+      info "Setting" "default settings"
+      $DOTFILES_ROOT/os/macos/set-defaults.sh 2>&1
     fi
 
   elif [[ "$OSTYPE" == "win"* ]]; then # Wins (what are you doing)
