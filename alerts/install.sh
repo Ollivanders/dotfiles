@@ -9,7 +9,7 @@ if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
         exit
     fi
 elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
-    
+    exit 0
 else
     echo "Sorry ${OSTYPE} unsupported"
     exit 0

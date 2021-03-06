@@ -17,6 +17,15 @@ function reset_all() {
     printf "" >$TROUBLESHOOTING_FILE
 }
 
+function adjust_image_location_reference() {
+    if [[ "$OSTYPE" =~ "darwin"* ]]; then # macOS
+        sed -i '' 's+./images/+./docs/images/+g' ${1}
+    else
+        sed -i -e 's+./images/+./docs/images/+g' ${1}
+    fi
+
+}
+
 reset_all
 
 # README
@@ -44,3 +53,7 @@ write_to $TROUBLESHOOTING_FILE todo
 write_to $INDEX_FILE intro
 write_to $INDEX_FILE features
 write_to $INDEX_FILE setup
+
+adjust_image_location_reference $README_FILE
+adjust_image_location_reference $INDEX_FILE
+adjust_image_location_reference $TROUBLESHOOTING_FILE

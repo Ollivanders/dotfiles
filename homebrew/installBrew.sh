@@ -20,6 +20,7 @@ fi
 cd ~/.dotfiles/homebrew
 
 echo "Running Brew bundle for local brew file, update, upgrade and cleanup"
+brew install cask
 brew bundle
 brew update
 brew upgrade

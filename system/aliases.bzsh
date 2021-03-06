@@ -19,6 +19,9 @@ alias chm "chmod 777 "
 alias reload!='. ~/.zshrc'      # reload zshrc file
 alias reload="exec ${SHELL} -l" # restart shell
 
+# Paths
+alias pcd='echo ${PWD}'
+
 # General
 alias cls='clear'
 alias pp='python3'
