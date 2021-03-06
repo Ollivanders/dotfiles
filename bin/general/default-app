@@ -2,14 +2,17 @@
 #
 # sets the default app for an extension <app> <ext>
 
-set -euo pipefail
+set -e
 
-if [[ "$OSTYPE" =~    darwin"* ]]; then # Linux
-  duti -s $(osascript -e 'id of app "$1"') $2 all
+if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
+    if grep -q Microsoft /proc/version; then
+      echo "wsl"
+    else
+      echo "linux"
+    fi
 elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
-  echo "Sorry ${OSTYPE} unsupported"
-  exit 0
+  echo "macos"
 else
-  echo "Sorry ${OSTYPE} unsupported"
-  exit 0
+    echo "Sorry ${OSTYPE} unsupported"
+    exit 0
 fi

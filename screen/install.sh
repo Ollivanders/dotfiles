@@ -2,8 +2,11 @@
 #
 # installation of screen
 
+echo "here"
 if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
-    sudo apt-get install screen
+    apt-get install screen
 elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
-    brew "screen"
+    if [[ ! -d "/Applications/docker.app" ]]; then
+        brew install screen
+    fi 
 fi

@@ -13,6 +13,8 @@ FONTVAR='[36m'
 FONTQUESTION='[0;33m'
 FONTANSWER='[0m'
 
+QUICK=false
+
 cd "$(dirname "$0")"
 
 DOTFILES_ROOT=$(pwd -P)
@@ -56,7 +58,6 @@ function fail() {
 
 #------------------------------------------------------------------------------
 # Prompting functions
-
 function prompt_line() {
   echo -ne "\e${FONTQUESTION}$1 \e${FONTANSWER}"
   read line
@@ -64,11 +65,20 @@ function prompt_line() {
 }
 
 function prompt_line_yn() {
+  function prompt_single_char() {
+    echo -ne "\e${FONTQUESTION}$1 \e${FONTANSWER}"
+    read -n1 line
+    echo -ne "\e[0m"
+    echo
+  }
   line=''
-  while [[ $line != 'n' ]] && [[ $line != 'y' ]] && [[ $line != 'exit' ]]; do
-    prompt_line "$1 [y/n/exit]"
+  if [[ ${QUICK} = true ]]; then
+    line='y'
+  fi
+  while [[ $line != 'n' ]] && [[ $line != 'y' ]] && [[ $line != 'e' ]]; do
+    prompt_single_char "$1 [y/n/e (e for exit]"
   done
-  if [[ $line =~ 'exit' ]]; then
+  if [[ $line =~ 'e' ]]; then
     echo "Exiting the letsgo protocol..."
     exit 0
   fi
@@ -170,6 +180,11 @@ function link_file() {
   fi
 }
 
+function sudo() {
+  [[ $EUID = 0 ]] || set -- command sudo "$@"
+  "$@"
+}
+
 #------------------------------------------------------------------------------
 # Intro
 function intro() {
@@ -225,9 +240,9 @@ function setup_git() {
 
       prompt_line_yn "This good???"
     done
-    #  git config --global user.name "${user}"
-    #  git config --global user.email "${email}"
-    sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example >git/gitconfig.local.symlink
+    git config --global user.name "${user}"
+    git config --global user.email "${email}"
+    # sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example >git/gitconfig.local.symlink
     success 'gitconfig'
   else
     echo "Sorry didin't mean to invade the setup, lets keep it classy and move on"
@@ -261,10 +276,11 @@ function setup_dotfiles() {
   else
     echo "We shall skip over those then..."
   fi
+}
 
+function setup_projects_dir() {
   echo "If you setup a projects directory, you can c [tab] into it from anywhere "
   prompt_line_yn "Would you like to setup a projects directory?"
-  # TODO fix
   if [[ $line =~ 'y' ]]; then
     projects_dir="${HOME}/Documents/projects"
     prompt_line_yn "Is ${projects_dir} okay as the project path?"
@@ -292,7 +308,7 @@ function setup_dotfiles() {
 #------------------------------------------------------------------------------
 # Install software
 function install_software() {
-  if source $DOTFILES_ROOT/script/install.sh | while read -r data; do info "Installing" "$data"; done; then
+  if source $DOTFILES_ROOT/script/softwareInstall.sh | while read -r data; do info "Installing" "$data"; done; then
     success "modules installed"
   else
     fail "error installing modules"
@@ -302,7 +318,7 @@ function install_software() {
 function setup_software() {
   begin_step "Installing all prescribed modules"
 
-  echo "This will run the script at script/install.sh, which will recursively run install.sh in all other directories"
+  echo "This will run the script at script/softwarenstall.sh, which will recursively run install.sh in all other directories"
 
   prompt_line_yn "Would you like to do this?"
 
@@ -417,7 +433,8 @@ function setup_zsh() {
         # info "it is recommended that you run: p10k configure"
         # cp "$HOME/.p10k.zsh" "$DOTFILES_ROOT/zsh/p10k.zsh.symlink"
         # rm "$HOME/.p10k.zsh"
-        $DOTFILES_ROOT/zsh/configurep10k.sh
+        # $DOTFILES_ROOT/zsh/configurep10k.sh
+        echo "logout/restart the shell to be on zsh then run 'p10k configure'"
       elif [[ $action = 'auto' ]]; then
         if [ "$(uname -s)" == "Darwin" ]; then
           cp "$DOTFILES_ROOT/zsh/p10kdesigns/macos.zsh" "$DOTFILES_ROOT/zsh/.p10k.zsh.symlink"
@@ -602,8 +619,11 @@ function specific_choice() {
     prompt_line " which would you like to setup"
 
     case $line in
-    "1")
+    "e")
       exit
+      ;;
+    "1")
+      setup_projects_dir
       ;;
     "2")
       update_software
@@ -637,14 +657,15 @@ function specific_choice() {
   }
 
   while [[ $line != 'exit' ]]; do
-    echo " 1 - exit "
+    echo " e - exit "
+    echo " 1 - projects dir "
     echo " 2 - update "
     echo " 3 - git "
     echo " 4 - dotfiles "
     echo " 5 - os "
     echo " 6 - software "
     echo " 7 - zsh "
-    echo " 8 - ssh_ke565s "
+    echo " 8 - ssh_keys "
     echo " 9 - default_editor "
 
     choose
@@ -654,6 +675,15 @@ function specific_choice() {
       exit
     fi
   done
+}
+
+function quick_install() {
+  QUICK=true
+  setup_dotfiles
+  setup_os
+  # setup_software
+  # setup_zsh
+  # setup_ssh_keys
 }
 
 #------------------------------------------------------------------------------
@@ -679,6 +709,9 @@ while [[ $# -gt 0 ]]; do
   "-u" | "--update")
     update_configuration
     ;;
+  "-q" | "--quick")
+    quick_install
+    ;;
   *)
     echo "Unknown arg: $1" >>/dev/stderr
     displayUsageAndExit
@@ -692,6 +725,7 @@ echo ''
 intro
 setup_git
 setup_dotfiles
+setup_projects_dir
 setup_os
 setup_software
 setup_zsh

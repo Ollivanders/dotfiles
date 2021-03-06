@@ -1,4 +1,4 @@
-<img src="./images/osSwirl.png" alt="drawing" style="width:300px;float: right"/>
+<img src="./docs/images/osSwirl.png" alt="drawing" style="width:300px;float: right"/>
 
 # The Dankest Dotfiles
 

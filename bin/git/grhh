@@ -1,0 +1,4 @@
+#!/bin/sh
+# reset the head
+
+git reset --hard HEAD

@@ -9,10 +9,10 @@ APT_NON_INTERACTIVE_OPTIONS='-yq -o APT::Get::AllowUnauthenticated=yes -o Acquir
 echo "installing zsh"
 
 if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
-    sudo apt-get $APT_NON_INTERACTIVE_OPTIONS install zsh
+    apt-get $APT_NON_INTERACTIVE_OPTIONS install zsh
     zsh --version
-    sudo chsh -s $(which zsh) $USER
-    sudo -u root chsh -s $(which zsh)
+    chsh -s $(which zsh) $USER
+    root chsh -s $(which zsh)
 elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
     brew install zsh
 else
@@ -20,6 +20,6 @@ else
     exit 0
 fi
 
-sudo apt-get $APT_NON_INTERACTIVE_OPTIONS update
+apt-get $APT_NON_INTERACTIVE_OPTIONS update
 
 echo "You is now having a great time with zsh, but this will require you to log out and back in"

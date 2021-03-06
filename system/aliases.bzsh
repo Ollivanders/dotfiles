@@ -13,11 +13,14 @@ if $(gls &>/dev/null); then
 fi
 
 alias copyLast='fc -ln -1 | awk '{$1=$1}1' | copy'
-alias chm "chmod 777 "
+alias chm="chmod 777 "
 
 # Reload
 alias reload!='. ~/.zshrc'      # reload zshrc file
 alias reload="exec ${SHELL} -l" # restart shell
+
+# Paths
+alias pcd='echo ${PWD}'
 
 # General
 alias cls='clear'

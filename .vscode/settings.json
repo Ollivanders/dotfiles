@@ -1,0 +1,11 @@
+{
+    "cSpell.words": [
+        "ohmyzzsh"
+    ],
+    "search.exclude": {
+        "**/.git": true,
+        "zsh/ohmyzsh": true,
+        "zsh/custom/themes/powerlevel10k": true,
+        "zsh/custom/plugins/": true,
+    },
+}
