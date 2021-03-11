@@ -43,7 +43,7 @@ QUICK COMPLETELY AUTO SETUP FOR RPI AND VM MANAGEMENT <-------------------------
 
 ### quick setup
 
-### quick update
+### quick update and install
 
 # Done but still testing
 

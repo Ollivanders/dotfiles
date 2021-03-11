@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# wifi speed test
+
+set -euo pipefail
+
+curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -

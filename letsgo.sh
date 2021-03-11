@@ -69,13 +69,12 @@ function prompt_line_yn() {
     echo -ne "\e${FONTQUESTION}$1 \e${FONTANSWER}"
     read -n1 line
     echo -ne "\e[0m"
+    echo
   }
   line=''
   if [[ ${QUICK} = true ]]; then
     line='y'
   fi
-  echo $QUICK
-  echo $line
   while [[ $line != 'n' ]] && [[ $line != 'y' ]] && [[ $line != 'e' ]]; do
     prompt_single_char "$1 [y/n/e (e for exit]"
   done
@@ -113,6 +112,9 @@ function link_file() {
   local overwrite= backup= skip=
   local action=
 
+  if [[ $QUICK = true ]]; then
+    overwrite_all = true
+  fi
   if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
 
     if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
@@ -241,9 +243,9 @@ function setup_git() {
 
       prompt_line_yn "This good???"
     done
-    #  git config --global user.name "${user}"
-    #  git config --global user.email "${email}"
-    sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example >git/gitconfig.local.symlink
+    git config --global user.name "${user}"
+    git config --global user.email "${email}"
+    # sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example >git/gitconfig.local.symlink
     success 'gitconfig'
   else
     echo "Sorry didin't mean to invade the setup, lets keep it classy and move on"
@@ -338,7 +340,11 @@ function setup_mac() {
 }
 
 function setup_ubuntu() {
-  $DOTFILES_ROOT/os/ubuntu/ubuntuInstall.sh 2>&1
+  if [[ $QUICK = true ]]; then
+    $DOTFILES_ROOT/os/ubuntu/ubuntuInstall.sh -q 2>&1
+  else
+    $DOTFILES_ROOT/os/ubuntu/ubuntuInstall.sh 2>&1
+  fi
 }
 
 function setup_os() {
@@ -681,10 +687,9 @@ function specific_choice() {
 function quick_install() {
   QUICK=true
   setup_dotfiles
-  # setup_os
-  # setup_software
-  # setup_zsh
-  # setup_ssh_keys
+  setup_os
+  setup_software
+  exit
 }
 
 #------------------------------------------------------------------------------

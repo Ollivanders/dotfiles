@@ -9,7 +9,6 @@ brew "grep"
 brew "bash"
 
 # vim tools
-brew "vim"
 brew "aspell"
 brew "ctags"
 
@@ -24,11 +23,15 @@ brew "duti"
 # keyboard tools
 # cask "karabiner-elements"
 
+# Remote 
+brew  "nmap"
+
 # databases
 # cask "postgres"
 
 # languages
 brew "node"
+brew "npm"
 brew "pyenv"
 brew "pyenv-virtualenv"
 # brew "zlib" # needed for pyenv installing
@@ -60,7 +63,6 @@ cask "quicksilver"
 # brew  "john"
 # brew  "knock"
 # brew  "netpbm"
-# brew  "nmap"
 # brew  "pngcheck"
 # brew  "socat"
 # brew  "sqlmap"

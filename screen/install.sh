@@ -4,9 +4,7 @@
 
 echo "here"
 if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
-    apt-get install screen
+    sudo apt-get install screen
 elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
-    if [[ ! -d "/Applications/docker.app" ]]; then
-        brew install screen
-    fi 
+    brew install screen
 fi

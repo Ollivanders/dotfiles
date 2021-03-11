@@ -2,14 +2,16 @@
 
 FROM ubuntu:20.04
 
-RUN apt-get update && apt-get upgrade
+RUN ["/bin/bash", "-c", "echo I am now using bash!"]
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \ 
+    sudo \
     git \
     nano \
-    vim
+    vim \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home
 RUN git clone https://github.com/Ollivanders/dotfiles && \
