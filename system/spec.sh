@@ -10,7 +10,6 @@ if [[ -a ~/.localrc ]]; then
 fi
 
 # all of our zsh files
-declare -U config_files
 config_files=($DOTFILES/**/*.bzsh)
 
 # Remove custom files that handle their own .zsh stuffs, 

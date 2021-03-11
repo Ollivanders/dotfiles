@@ -40,15 +40,9 @@ QUICK COMPLETELY AUTO SETUP FOR RPI AND VM MANAGEMENT <-------------------------
 - uses bash
 - symlinks only
 
-### bash only config
-
-### quick setup
-
-### quick update and install
-
 # Done but still testing
 
 - windows powerline configs (and all windows stuff really)
 - check path and completion functionality
 - check bash cross compatability
-- iTerm coooolourig
+- iTerm colouring

@@ -30,8 +30,9 @@ STEP=1
 function begin_step() {
   echo -e "\e${FONTTITLE}"
   echo '----------------------------------------------------------------------'
-  echo -e "  Step ${STEP}: "
-  echo '----------------------------------------------------------------------$1\e[0m'
+  echo -e "  Step ${STEP}: $1"
+  echo '----------------------------------------------------------------------'
+  echo '\e[0m'
   STEP=$((STEP + 1))
 }
 
@@ -114,12 +115,12 @@ function link_file() {
   local overwrite= backup= skip=
   local action=
 
-  if [[ $QUICK = true ]]; then
-    overwrite_all = true
+  if [[ ${QUICK} = true ]]; then
+    overwrite_all=true
   fi
   if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
 
-    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
+    if [ $QUICK = false ] && [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
 
       local currentSrc="$(readlink $dst)"
 
@@ -249,8 +250,8 @@ function setup_git() {
     # git config --global user.name "${user}"
     # git config --global user.email "${email}"
     sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example >git/gitconfig.local.symlink
-    if [[ ! -d $HOME/.gitconfig.local ]]; then
-      link_file "git/.gitconfig.local " "$HOME/.gitconfig.local "
+    if [[ ! -d $HOME/.gitconfig.local.symlink ]]; then
+      link_file "git/.gitconfig" "$HOME/.gitconfig.symlink" # do it hear to make sure it defo makes it
     fi
     success 'gitconfig'
   else
@@ -420,16 +421,16 @@ function setup_zsh() {
       echo "Hang tight while we install some external libraries"
       git submodule init
       git submodule update
-      if [[ -d $HOME/.oh-my-zsh ]]; then
+      if [[ ! -d $HOME/.oh-my-zsh ]]; then
         link_file "$DOTFILES_ROOT/zsh/ohmyzsh" "$HOME/.oh-my-zsh"
       fi
 
-      info "change" "manually after running 'p10k configure'"
+      info "change" "manually after running 'p10k configure' and logging out to init ZSH"
       user "Would you like to use a default .p10k.zsh with a default configuration?"
       user "It is recommended you configure your own, as this will automatically install the appropriate fonts on your behalf if you have not done so"
 
       action=''
-      while [[ $action != '295' ]] && [[ $action != 'auto' ]]; do
+      while [[ $action != 'configure' ]] && [[ $action != 'auto' ]]; do
         prompt_line "[configure/auto]"
         action=$line
       done
@@ -525,13 +526,13 @@ function setup_complete() {
   success "Everything has been installed, polished and setup,"
   echo ""
 
-  if [[ $USING_ZSH = true ]]; then
-    warning "If this is new setup of ZSH, you may have to reset the shell or logout for changes to take affect"
-    source ~/.zshrc
-  else
-    source ~/.bashrc
-  fi
+  warning "If this is new setup of ZSH, you may have to reset the shell or logout for changes to take affect"
+§
+  info "Reload Shell" "You will need to reload your shell with these changes"
+  echo "Run 'reload!' to do this if previously setup, otherwise to re-source your rc file run:"
+  echo "source script/re-source.sh"
 
+  echo ""
   echo "If you followed the instructions correctly, did not change anything groundbreaking and avoided errors"
   echo "You should now be living in paradise:"
   echo "Upon seeing your setup, girls will be throwing themsevles at you,"
@@ -700,9 +701,18 @@ function specific_choice() {
 
 function quick_install() {
   QUICK=true
-  setup_dotfiles
-  setup_os
-  setup_software
+  install_dotfiles
+  install_software
+
+  # setup_os
+  if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
+    setup_ubuntu
+  elif [[ "$OSTYPE" =~ "darwin"* ]]; then #macOS
+    setup_mac
+  else
+    echo "Sorry ${OSTYPE} unsupported"
+    exit 0
+  fi
   exit
 }
 

@@ -36,12 +36,12 @@ fi
 ##############################################################################
 if [[ $QUICK = false ]]; then
   snap install --classic code
-  sudo apt-get install $APT_NON_INTERACTIVE_OPTIONS /
+  sudo apt-get install $APT_NON_INTERACTIVE_OPTIONS \
   npm \
   nodejs
 fi
-sudo apt-get install $APT_NON_INTERACTIVE_OPTIONS /
-  curl /
+sudo apt-get install $APT_NON_INTERACTIVE_OPTIONS \
+  curl \
   nano
 
 # install chrome
