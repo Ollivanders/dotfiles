@@ -30,7 +30,8 @@ STEP=1
 function begin_step() {
   echo -e "\e${FONTTITLE}"
   echo '----------------------------------------------------------------------'
-  echo -e "  Step ${STEP}: $1\e[0m"
+  echo -e "  Step ${STEP}: "
+  echo '----------------------------------------------------------------------$1\e[0m'
   STEP=$((STEP + 1))
 }
 
@@ -64,13 +65,14 @@ function prompt_line() {
   echo -ne "\e[0m"
 }
 
+function prompt_single_char() {
+  echo -ne "\e${FONTQUESTION}$1 \e${FONTANSWER}"
+  read -n1 line
+  echo -ne "\e[0m"
+  echo
+}
+
 function prompt_line_yn() {
-  function prompt_single_char() {
-    echo -ne "\e${FONTQUESTION}$1 \e${FONTANSWER}"
-    read -n1 line
-    echo -ne "\e[0m"
-    echo
-  }
   line=''
   if [[ ${QUICK} = true ]]; then
     line='y'
@@ -212,7 +214,8 @@ function setup_git() {
   echo -e "Lets configure git first" #\e${FONTFACE}😊\e[0m
 
   if ! [ -f git/gitconfig.local.symlink ]; then
-    echo "Git is not setup yet"
+    echo "Git is not setup yet with these dotfiles"
+    echo "because the dotfiles keep gitconfig.local as a seperate file, you need to reconfigure it here"
     prompt_line_yn "Would you like to get it up and running now?"
   else
     echo "Git is already setup"
@@ -243,9 +246,12 @@ function setup_git() {
 
       prompt_line_yn "This good???"
     done
-    git config --global user.name "${user}"
-    git config --global user.email "${email}"
-    # sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example >git/gitconfig.local.symlink
+    # git config --global user.name "${user}"
+    # git config --global user.email "${email}"
+    sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example >git/gitconfig.local.symlink
+    if [[ ! -d $HOME/.gitconfig.local ]]; then
+      link_file "git/.gitconfig.local " "$HOME/.gitconfig.local "
+    fi
     success 'gitconfig'
   else
     echo "Sorry didin't mean to invade the setup, lets keep it classy and move on"
@@ -518,6 +524,14 @@ function setup_complete() {
   echo ""
   success "Everything has been installed, polished and setup,"
   echo ""
+
+  if [[ $USING_ZSH = true ]]; then
+    warning "If this is new setup of ZSH, you may have to reset the shell or logout for changes to take affect"
+    source ~/.zshrc
+  else
+    source ~/.bashrc
+  fi
+
   echo "If you followed the instructions correctly, did not change anything groundbreaking and avoided errors"
   echo "You should now be living in paradise:"
   echo "Upon seeing your setup, girls will be throwing themsevles at you,"
@@ -623,7 +637,7 @@ function specific_choice() {
   echo "Avalaible setup configurations: "
 
   function choose() {
-    prompt_line " which would you like to setup"
+    prompt_single_char " which would you like to setup"
 
     case $line in
     "e")

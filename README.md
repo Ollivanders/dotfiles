@@ -2,11 +2,13 @@
 
 # The Dankest Dotfiles
 
-Many of us have tapped into the chaotic good energy created from custom preferences, however keeping these bad bois consistent and shared between your work setups, virtual machines, raspberry pi, macbook pro with enhanced graphics and the computer that you let your cat borrow in exchange for him doing the washing up, is not only challenging but damn complicated and frustrating when you can't rely on muscle memory. So here collected, is a ubuntu/mac advanced developer setup.
+Many of us have tapped into the chaotic good energy created from custom preferences, However keeping these bad bois consistent and shared between your work setups, virtual machines, raspberry pi, macbook, clusters, whatever Docker is, and the computer that you let your cat borrow in exchange for him doing the washing up, is not only challenging but damn frustrating when you can't rely on your beautiful alias's to do their job. 
 
-Your system crashes and a tear starts to trickle down your face at the prospect of setting up your system again. Swipe that misery away, reinstall from here and you will be living the dream once again.
+So here collected, is a ubuntu/mac advanced developer setup for maintaining such a setup.
 
-note, these files are written for UNIX based systems, including WSL, Linux and MacOs
+Your system crashes ---> a tear starts to trickle down your face as dark thoughts of setting up your system again enter your brain. A mental tally of the number of times you are going to have to write apt install begins to only be reminded every single time you do it that you forgot to write sudo. 
+
+Swipe that misery away, reinstall from here and you will be frolicking with unicorns again.
 # Description and Features
 
 - Installation organised by application/OS
@@ -58,6 +60,7 @@ With an ever morphing world, the number of potential contexts installation that 
 
   - add automator symlink and other mac services configuration
   - add scripts to services by custom keybindings
+  - add custom keybindings (transfer from snap to native)
 
   - look at integrating https://github.com/wting/autojump/blob/master/install.py auto
   - save ubuntu settings (favorites, dock position and size etc. )
@@ -93,7 +96,7 @@ QUICK COMPLETELY AUTO SETUP FOR RPI AND VM MANAGEMENT <-------------------------
 
 ### quick setup
 
-### quick update
+### quick update and install
 
 # Done but still testing
 

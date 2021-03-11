@@ -24,24 +24,6 @@ if [[ -a ~/.localrc ]]; then
   source ~/.localrc
 fi
 
-# all of our zsh files
-typeset -U config_files
-config_files=($DOTFILES/**/*.zsh)
-
-# Remove custom files that handle their own .zsh stuffs, 
-# leaving just the goodies in the their .dotfiles directory
-config_files=(${${${config_files:#*/powerlevel10k*}:#*/custom*}:#*/ohmyzsh*})
-for file in ${(M)config_files:#*/path.zsh}
-do
-  source $file
-done
-
-# load everything but the path and completion files # TODO: no longer need to ignore these 
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
-do
-  source $file
-done
-
 # Better history
 # Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
 autoload -U up-line-or-beginning-search

@@ -20,8 +20,8 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-sudo apt-get $APT_NON_INTERACTIVE_OPTIONS install update
-sudo apt-get $APT_NON_INTERACTIVE_OPTIONS install upgrade
+sudo apt-get $APT_NON_INTERACTIVE_OPTIONS update
+sudo apt-get $APT_NON_INTERACTIVE_OPTIONS upgrade
 
 ##############################################################################
 # Terminal
@@ -38,11 +38,11 @@ if [[ $QUICK = false ]]; then
   snap install --classic code
   sudo apt-get install $APT_NON_INTERACTIVE_OPTIONS /
   npm \
-    nodejs
+  nodejs
 fi
 sudo apt-get install $APT_NON_INTERACTIVE_OPTIONS /
-curl /
-nano
+  curl /
+  nano
 
 # install chrome
 if [[ $QUICK = false ]]; then
