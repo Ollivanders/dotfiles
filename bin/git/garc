@@ -1,0 +1,5 @@
+#!/bin/sh
+# git add all and continue rebase
+
+git add -A
+git rebase --continue

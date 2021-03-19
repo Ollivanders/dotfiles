@@ -20,7 +20,7 @@ alias reload!='. ~/.zshrc'      # reload zshrc file
 alias reload="exec ${SHELL} -l" # restart shell
 
 # Paths
-alias pcd='echo ${PWD}'
+alias pwd='echo ${PWD}'
 
 # General
 alias cls='clear'
