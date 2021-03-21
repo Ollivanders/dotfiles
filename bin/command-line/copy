@@ -4,12 +4,12 @@
 
 ############## USE
 # Proceed any command with copy and its stdout will be piped to the clipboard
-# copy cat.txt 
+# copy cat test.txt 
 # or
 # cat test.txt | copy
 ##############
 
-set -euo pipefail
+set -eu
 
 COMMAND=""
 if [ -p /dev/stdin ]; then

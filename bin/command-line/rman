@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# for decypting cryptic shell commands
+# TODO make this locally run as well e.g. pbpaste isn't in explainshell linux db
+# usage:
+#   rman wget -b
+
+cmd=$1
+shift
+args=$*
+args=${args/ /+}
+w3m -dump "https://explainshell.com/explain/$cmd?args=$args" | tail -n +10

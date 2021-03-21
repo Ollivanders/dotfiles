@@ -6,7 +6,7 @@
 brew "tmux"
 brew "zsh"
 brew "grep"
-brew "bash"
+brew "bash-completion"
 
 # vim tools
 brew "aspell"
@@ -25,11 +25,14 @@ brew "duti"
 
 # Remote 
 brew  "nmap"
+brew "chrome-cli"
+cask "google-chrome"
 
 # databases
 # cask "postgres"
 
 # languages
+brew "bash"
 brew "node"
 brew "npm"
 brew "pyenv"
