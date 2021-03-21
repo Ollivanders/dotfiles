@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#
+# paste and run the current clipboard into bin/test.sh
+# easy to fill contents to (see general) to test bash concepts and stuffs
+
+test_path=$DOTFILES/bin/test.sh
+
+if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then     # Linux
+    if grep -q Microsoft /proc/version; then # linux inside of WSL
+        xclip.exe -selection clipboard -o $test_path
+    else # normal linux
+        xclip -selection clipboard
+    fi
+elif [[ "$OSTYPE" =~ "darwin"* ]]; then # macOS
+    pbpaste > $test_path
+else
+    echo "Sorry ${OSTYPE} unsupported"
+    exit 0
+fi
+
+./test_path

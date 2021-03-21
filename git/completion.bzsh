@@ -2,12 +2,20 @@
 # bash `git-completion` script at $completion below (this is where Homebrew
 # tosses it, at least).
 
-CURRENT_SHELL=$(basename $(echo ${SHELL}))
-if [[ $CURRENT_SHELL =~ "zsh" ]]; then
-  completion='$(brew --prefix)/share/zsh/site-functions/_git'
-
-  if test -f $completion
-  then
-    source $completion
+completion=".git-completion.bash"
+if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
+  if [ -f /etc/bash_completion.d/git]; then
+    completion=/etc/bash_completion.d/git
+  elif [ -f /usr/share/bash-completion/completions/git ]; then
+    completion=/usr/share/bash-completion/completions/git
   fi
+elif [[ "$OSTYPE" =~ "darwin"* ]]; then # macOS
+  completion='$(brew --prefix)/share/zsh/site-functions/_git'
+else
+  echo "Sorry ${OSTYPE} unsupported"
+  exit 0
+fi
+
+if test -f $completion; then
+  source $completion
 fi
