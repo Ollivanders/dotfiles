@@ -61,6 +61,8 @@ With an ever morphing world, the number of potential contexts installation that 
   - add automator symlink and other mac services configuration
   - add scripts to services by custom keybindings
   - add custom keybindings (transfer from snap to native)
+  - amphetamine and magnets
+  - docker testing
 
   - look at integrating https://github.com/wting/autojump/blob/master/install.py auto
   - save ubuntu settings (favorites, dock position and size etc. )
@@ -91,6 +93,7 @@ QUICK COMPLETELY AUTO SETUP FOR RPI AND VM MANAGEMENT <-------------------------
 
 - uses bash
 - symlinks only
+
 
 # Done but still testing
 

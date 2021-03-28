@@ -54,7 +54,7 @@ if [[ $QUICK = false ]]; then
   fi
 fi
 
-sudo apt-get install git-core bash-completion
+sudo apt-get install git-core
 
 ##############################################################################
 # Presentation
