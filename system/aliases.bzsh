@@ -2,6 +2,11 @@
 # Global Aliases (zsh and bash)
 ##################
 
+# Search, find, grep and other locating
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias hg='history | grep'
 # grc overides for ls
 #   Made possible through contributions from generous benefactors like
 #   `brew install coreutils`
@@ -12,8 +17,6 @@ if $(gls &>/dev/null); then
   alias la='gls -A --color'
 fi
 
-alias cope="copy echo "
-alias chm="chmod 777 "
 
 # Reload
 alias reload!='. ~/.zshrc'      # reload zshrc file
@@ -23,7 +26,9 @@ alias reload="exec ${SHELL} -l" # restart shell
 alias pwd='echo ${PWD}'
 
 # General
+alias cope="copy echo "
 alias cls='clear'
+alias chm="chmod 777 "
 alias pp='python3'
 alias rf='rm -rf'
 
@@ -31,11 +36,6 @@ alias rf='rm -rf'
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-
-# Grep
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 
 # Shortcuts
 alias dl="cd ~/Downloads"

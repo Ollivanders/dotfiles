@@ -81,14 +81,15 @@ plugins=(
   )
 else
 plugins=(
+  alias-finder
+  auto-ls
+  extract
+  docker
   git 
+  history-substring-search
+  zsh-autosuggestions
   zsh-syntax-highlighting 
   # vi-mode
-  auto-ls
-  zsh-autosuggestions
-  history-substring-search
-  extract
-  alias-finder
   )
 fi
 

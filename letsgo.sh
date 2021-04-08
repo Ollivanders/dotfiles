@@ -41,7 +41,7 @@ function info() {
 }
 
 function warning() {
-  printf "\r  [ \033[00;36m\!\!\033[0m ] $1\n"
+  printf "\r  [ \033[00;35m!!\033[0m ] $1\n"
 }
 
 function user() {
@@ -289,6 +289,8 @@ function setup_dotfiles() {
 }
 
 function setup_projects_dir() {
+  begin_step 'Setting up projects dir'
+  
   echo "If you setup a projects directory, you can c [tab] into it from anywhere "
   prompt_line_yn "Would you like to setup a projects directory?"
   if [[ $line =~ 'y' ]]; then
@@ -522,22 +524,19 @@ function setup_ssh_keys() {
 #------------------------------------------------------------------------------
 # Setup complete print out
 function setup_complete() {
-  echo ""
   success "Everything has been installed, polished and setup,"
-  echo ""
+  # warning "If this is new setup of ZSH, you may have to reset the shell or "
+  info "Reload Shell" "for changes to take effect"
 
-  warning "If this is new setup of ZSH, you may have to reset the shell or logout for changes to take affect"
-§
-  info "Reload Shell" "You will need to reload your shell with these changes"
-  echo "Run 'reload!' to do this if previously setup, otherwise to re-source your rc file run:"
-  echo "source script/re-source.sh"
-
-  echo ""
-  echo "If you followed the instructions correctly, did not change anything groundbreaking and avoided errors"
-  echo "You should now be living in paradise:"
-  echo "Upon seeing your setup, girls will be throwing themsevles at you,"
-  echo "Danny Devito will probs be in your DMs and you will becoming instantly aroused every time you open a command line."
-  echo "But now your interface looks like its been crafted by Tony Stark himself, go back out there and actually do some work."
+  printf "Run 'reload!' to do this if previously setup, otherwise to re-source your rc file run:\n"
+  printf "source script/re-source.sh \n"
+  printf "If this the first time configuring zsh, please logout \n"
+  printf "\n"
+  # printf "If you followed the instructions correctly, did not change anything groundbreaking and avoided errors\n"
+  printf "You should now be living in paradise: \n"
+  printf "Upon seeing your setup, girls will be throwing themsevles at you, 
+Danny Devito will probs be in your DMs and you will becoming instantly aroused every time you open a command line.
+But now your interface looks like its been crafted by Tony Stark himself, go back out there and actually do some work.\n"
 }
 
 #------------------------------------------------------------------------------

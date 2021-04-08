@@ -10,7 +10,7 @@
 ##############
 
 set -eu
-
+  
 COMMAND=""
 if [ -p /dev/stdin ]; then
     # echo "Data was piped to this script!"
@@ -24,7 +24,7 @@ fi
 
 if [[ "$OSTYPE" =~ "linux-gnu"* ]]; then # Linux
     if grep -q Microsoft /proc/version; then
-        clip.exe | eval $COMMAND
+        eval $COMMAND | clip.exe
     else
         eval $COMMAND | xclip
     fi
