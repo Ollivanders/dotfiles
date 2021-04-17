@@ -17,7 +17,6 @@ if $(gls &>/dev/null); then
   alias la='gls -A --color'
 fi
 
-
 # Reload
 alias reload!='. ~/.zshrc'      # reload zshrc file
 alias reload="exec ${SHELL} -l" # restart shell
@@ -43,5 +42,8 @@ alias dt="cd ~/Desktop"
 alias p="cd ~/Documents/Projects"
 alias ch="cd ~/"
 alias cdot="cd $DOTFILES"
+
+# Additional apps and plugins
+eval "$(thefuck --alias fuck)"
 
 # TODO configure for bash as well (change system directory to .sh or more gen)

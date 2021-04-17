@@ -69,14 +69,18 @@ ZSH_CUSTOM=${ZSHPATH}/custom
 # Add wisely, as too many plugins slow down shell startup.
 if [[ "$OSTYPE" =~ "darwin"* ]]; then # macOS
 plugins=(
+  alias-finder
+  auto-ls
+  extract
+  docker
   git 
+  history-substring-search
+  thefuck
+  # sudo
+  zsh-autosuggestions
   zsh-syntax-highlighting 
   # vi-mode
-  auto-ls
-  zsh-autosuggestions
-  history-substring-search
-  extract
-  alias-finder
+  
   osx
   )
 else
@@ -87,6 +91,8 @@ plugins=(
   docker
   git 
   history-substring-search
+  thefuck
+  # sudo
   zsh-autosuggestions
   zsh-syntax-highlighting 
   # vi-mode

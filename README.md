@@ -9,7 +9,7 @@ So here collected, is a ubuntu/mac advanced developer setup for maintaining such
 
 Your system crashes ---> a tear starts to trickle down your face as dark thoughts of setting up your system again enter your brain. A mental tally of the number of times you are going to have to write apt install begins to only be reminded every single time you do it that you forgot to write sudo. 
 
-Swipe that misery away, reinstall from here and you will be frolicking with unicorns again.
+Swipe that misery away, reinstall from here and you will be frolicking with unicorns again.                                                                                           
 # Description and Features
 
 - Installation organised by application/OS

@@ -23,6 +23,12 @@ done
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS update
 sudo apt-get $APT_NON_INTERACTIVE_OPTIONS upgrade
 
+sudo apt-get install \
+  python3
+  python3-dev
+  python3-pip 
+  python3-setuptools
+
 ##############################################################################
 # Terminal
 ##############################################################################
@@ -56,6 +62,8 @@ fi
 
 sudo apt-get install git-core
 
+
+sudo pip3 install thefuck
 ##############################################################################
 # Presentation
 ##############################################################################
