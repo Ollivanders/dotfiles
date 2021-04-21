@@ -4,7 +4,7 @@
 
 set -e
 
-source/general.sh
+source script/general.sh
 cd "$(dirname "$0")"
 QUICK=false
 DOTFILES_ROOT=$(pwd -P)
@@ -17,6 +17,7 @@ STEP=1
 #------------------------------------------------------------------------------
 # Intro
 function intro() {
+  cat script/logo.txt
   echo
   echo -e "  \e${FONTTITLE} Welcome to your tasty $OSTYPE setup \e[0m"
   echo
@@ -312,7 +313,7 @@ function setup_ssh_keys() {
         cd
         pwd
       )/.ssh"
-      echo -n "${copycommand}" | xsel --clipboard
+      # echo -n "${copycommand}" | xsel --clipboard
       echo "Run this in bash/cygwin on your host system, I've already copied"
       echo -e "it into the clipboard for you \e${FONTFACE}😎 \e[0m:"
       echo

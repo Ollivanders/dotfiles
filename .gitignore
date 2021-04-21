@@ -4,3 +4,4 @@ docs/imageBoard.key
 git/functions.bzsh
 zsh/zshrc.symlink
 zsh/p10k.zsh.symlink
+bin/local/*
