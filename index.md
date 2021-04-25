@@ -1,3 +1,4 @@
+
 <img src="./docs/images/osSwirl.png" alt="drawing" style="width:300px;float: right"/>
 
 # DOM - Dotfile Organisation Manager
@@ -47,7 +48,7 @@ Swipe that misery away, reinstall from here and you will be frolicking with unic
 ```
 sudo apt-get install git # if needed
 git clone https://github.com/Ollivanders/dotfiles.git
-./letsgo
+./letsgo.sh
 ```
 
 If you have any troubles, read through: [a relative link][./troubleshooting.md]

@@ -1,3 +1,4 @@
+
 <img src="./docs/images/osSwirl.png" alt="drawing" style="width:300px;float: right"/>
 
 # DOM - Dotfile Organisation Manager
@@ -47,7 +48,7 @@ Swipe that misery away, reinstall from here and you will be frolicking with unic
 ```
 sudo apt-get install git # if needed
 git clone https://github.com/Ollivanders/dotfiles.git
-./letsgo
+./letsgo.sh
 ```
 
 If you have any troubles, read through: [a relative link][./troubleshooting.md]
@@ -102,6 +103,17 @@ QUICK COMPLETELY AUTO SETUP FOR RPI AND VM MANAGEMENT <-------------------------
 - check path and completion functionality
 - check bash cross compatability
 - iTerm colouring
+
+## Feedback
+
+Suggestions/improvements
+[welcome](https://github.com/Ollivanders/dotfiles/issues)!
+
+## Author
+
+| ![](https://avatars.githubusercontent.com/u/37331057?s=400&u=909ce6671d549e8f71a6adab661228506b1d49a2&v=4](https://ollivander.dev "View....") |
+| --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Oli Baxandall/Ollivander](https://ollivander.dev)                                                                                            |
 
 # Acknowledgments
 

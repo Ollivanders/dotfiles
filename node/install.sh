@@ -7,3 +7,5 @@ then
     npm install spoof -g
   fi
 fi
+
+npm install -i 
