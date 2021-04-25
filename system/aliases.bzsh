@@ -18,8 +18,9 @@ if $(gls &>/dev/null); then
 fi
 
 # Reload
-alias reload!='. ~/.zshrc'      # reload zshrc file
-alias reload="exec ${SHELL} -l" # restart shell
+alias reload!='. ~/.dotfiles/script/re-source.sh' # reload zshrc file
+alias rel='reload!'                               # reload zshrc file
+alias reload="exec ${SHELL} -l"                   # restart shell
 
 # Paths
 alias pwd='echo ${PWD}'
@@ -29,6 +30,7 @@ alias cope="copy echo "
 alias cls='clear'
 alias chm="chmod 777 "
 alias pp='python3'
+alias g='git'
 alias rf='rm -rf'
 
 # IP addresses

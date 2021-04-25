@@ -5,3 +5,5 @@ git/functions.bzsh
 zsh/zshrc.symlink
 zsh/p10k.zsh.symlink
 bin/local/*
+system/local.bzsh
+*local*

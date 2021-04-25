@@ -29,6 +29,9 @@ function adjust_image_location_reference() {
 reset_all
 
 # README
+printf "\n" >>$README_FILE
+printf "\n" >>$INDEX_FILE
+
 write_to $README_FILE intro
 write_to $README_FILE features
 write_to $README_FILE setup

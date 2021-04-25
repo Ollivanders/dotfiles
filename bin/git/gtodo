@@ -2,4 +2,3 @@
 # 
 # List git todos 
 
-git grep -l TODO | xargs -n1 git blame -f -n -w | grep "Your name" | grep TODO | sed "s/.\{9\}//" | sed "s/(.*)[[:space:]]*//"
