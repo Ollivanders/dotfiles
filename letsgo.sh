@@ -4,7 +4,11 @@
 
 set -e
 
-source/general.sh
+if [ -z ${DOTFILES+x} ]; then
+  source script/general.sh
+else
+  source ${DOTFILES}/script/general.sh
+fi
 cd "$(dirname "$0")"
 QUICK=false
 DOTFILES_ROOT=$(pwd -P)
@@ -17,6 +21,7 @@ STEP=1
 #------------------------------------------------------------------------------
 # Intro
 function intro() {
+  cat docs/logo.txt
   echo
   echo -e "  \e${FONTTITLE} Welcome to your tasty $OSTYPE setup \e[0m"
   echo
@@ -73,11 +78,11 @@ function setup_git() {
     # git config --global user.name "${user}"
     # git config --global user.email "${email}"
     sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example >git/gitconfig.local.symlink
-    if [[ ! -L $HOME/.gitconfig.local.symlink ]]; then
-      link_file "git/.gitconfig.local" "$HOME/.gitconfig.local.symlink" # do it hear to make sure it defo makes it
+    if [[ ! -L $HOME/.gitconfig.local ]]; then
+      link_file "git/.gitconfig.local" "$HOME/.gitconfig.local" # do it hear to make sure it defo makes it
     fi
-    if [[ ! -L $HOME/.gitconfig.symlink ]]; then
-      link_file "git/.gitconfig" "$HOME/.gitconfig.symlink" # do it hear to make sure it defo makes it
+    if [[ ! -L $HOME/.gitconfig ]]; then
+      link_file "git/.gitconfig" "$HOME/.gitconfig" # do it hear to make sure it defo makes it
     fi
     success 'gitconfig'
   else
@@ -111,35 +116,6 @@ function setup_dotfiles() {
     install_dotfiles
   else
     echo "We shall skip over those then..."
-  fi
-}
-
-function setup_projects_dir() {
-  begin_step 'Setting up projects dir'
-
-  echo "If you setup a projects directory, you can c [tab] into it from anywhere "
-  prompt_line_yn "Would you like to setup a projects directory?"
-  if [[ $line =~ 'y' ]]; then
-    projects_dir="${HOME}/Documents/projects"
-    prompt_line_yn "Is ${projects_dir} okay as the project path?"
-    done=false
-    if [[ $line =~ 'y' ]]; then
-      done=true
-    fi
-    while [ $done = false ]; do
-      projects_dir="_[]"
-      prompt_line "Please specific Project Dir as a evaluative path"
-      projects_dir=$line
-      if [[ ! -d $projects_dir ]]; then
-        echo "The directory does not exist, it can be created for you"
-      fi
-      prompt_line_yn "Is ${projects_dir} okay as the project path?"
-      if [[ $line =~ 'y' ]]; then
-        done=true
-      fi
-    done
-    mkdir -p $projects_dir # make the directory if it does not exist
-    echo "export PROJECTS_DIR=${projects_dir}" >system/env.zsh
   fi
 }
 
@@ -312,17 +288,16 @@ function setup_ssh_keys() {
         cd
         pwd
       )/.ssh"
-      echo -n "${copycommand}" | xsel --clipboard
-      echo "Run this in bash/cygwin on your host system, I've already copied"
-      echo -e "it into the clipboard for you \e${FONTFACE}😎 \e[0m:"
+      # echo -n "${copycommand}" | xsel --clipboard
+      echo "Run this in bash/cygwin on your host system, \e${FONTFACE}😎 \e[0m:"
       echo
       echo -e "  \e${FONTVAR}${copycommand}\e[0m "
       wait_for_enter
 
     elif [[ $action = 'generate' ]]; then # Generate new key
       ssh-keygen
-      ssh-add "${pub_key}"
-      ssh-add -l
+      # ssh-add "${pub_key}"
+      # ssh-add -l
     fi
 
     # Validate
@@ -338,10 +313,6 @@ function setup_ssh_keys() {
     . "${bashrc}"
 
     sshconfig="${HOME}/.ssh/config"
-    if [[ ! -e "${sshconfig}" ]]; then
-      echo -e "Writing to \e${FONTVAR}${sshconfig}\e[0m"
-      echo -e "Host bitbucket.org\n ControlMaster yes\n IdentityFile ~/.ssh/id_rsa" >"${sshconfig}"
-    fi
 
     info "Note" "You can copy this ssh key to your clipboard with the 'pubkey' function, located in bin/"
   fi
@@ -470,30 +441,27 @@ function specific_choice() {
       exit
       ;;
     "1")
-      setup_projects_dir
-      ;;
-    "2")
       update_software
       ;;
-    "3")
+    "2")
       setup_git
       ;;
-    "4")
+    "3")
       setup_dotfiles
       ;;
-    "5")
+    "4")
       setup_os
       ;;
-    "6")
+    "5")
       setup_software
       ;;
-    "7")
+    "6")
       setup_zsh
       ;;
-    "8")
+    "7")
       setup_ssh_keys
       ;;
-    "9")
+    "8")
       setup_default_editor
       ;;
     *)
@@ -580,7 +548,6 @@ echo ''
 intro
 setup_git
 setup_dotfiles
-setup_projects_dir
 setup_os
 setup_software
 setup_zsh
