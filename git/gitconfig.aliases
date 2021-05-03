@@ -29,13 +29,23 @@ mergetheirs = merge --strategy-option theirs
 #############################################################################
 # Commit emojis
 acmp = "!f() { git add .; git commit -m \"$@\"; git push; }; f"
-new = "!f() { git acmp \"📦 NEW: $@\"; }; f"
-imp = "!f() { git acmp \"👌 IMPROVE: $@\"; }; f"
-fix = "!f() { git acmp \"🐛 FIX: $@\"; }; f"
-rlz = "!f() { git acmp \"🚀 RELEASE: $@\"; }; f"
-doc = "!f() { git acmp \"📖 DOC: $@\"; }; f"
-tst = "!f() { git acmp \"🤖 TEST: $@\"; }; f"
-brk = "!f() { git acmp \"‼️ BREAKING: $@\"; }; f"
+amp = "!f() { git add .; git commit --amend -m \"$@\"; git push; }; f"
+
+commitnew = "!f() { git acmp \"📦 NEW: $@\"; }; f"
+commitimp = "!f() { git acmp \"👌 IMPROVE: $@\"; }; f"
+commitfix = "!f() { git acmp \"🐛 FIX: $@\"; }; f"
+commitrlz = "!f() { git acmp \"🚀 RELEASE: $@\"; }; f"
+commitdoc = "!f() { git acmp \"📖 DOC: $@\"; }; f"
+committst = "!f() { git acmp \"🤖 TEST: $@\"; }; f"
+commitbrk = "!f() { git acmp \"‼️ BREAKING: $@\"; }; f"
+
+amendnew = "!f() { git amp \"📦 NEW: $@\"; }; f"
+amendimp = "!f() { git amp \"👌 IMPROVE: $@\"; }; f"
+amendfix = "!f() { git amp \"🐛 FIX: $@\"; }; f"
+amendrlz = "!f() { git amp \"🚀 RELEASE: $@\"; }; f"
+amenddoc = "!f() { git amp \"📖 DOC: $@\"; }; f"
+amendtst = "!f() { git amp \"🤖 TEST: $@\"; }; f"
+amendbrk = "!f() { git amp \"‼️ BREAKING: $@\"; }; f"
 
 #############################################################################
 # Short bois

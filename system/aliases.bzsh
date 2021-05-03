@@ -45,7 +45,7 @@ alias p="cd ~/Documents/Projects"
 alias ch="cd ~/"
 alias cdot="cd $DOTFILES"
 
-# Additional apps and plugins
+# Additional apps, scripts and plugins
 eval "$(thefuck --alias fuck)"
 
 # TODO configure for bash as well (change system directory to .sh or more gen)

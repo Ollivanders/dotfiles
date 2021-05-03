@@ -79,10 +79,10 @@ function setup_git() {
     # git config --global user.email "${email}"
     sed -e "s/AUTHORNAME/$user/g" -e "s/AUTHOREMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.example >git/gitconfig.local
     if [[ ! -L $HOME/.gitconfig.local ]]; then
-      link_file "git/.gitconfig.local" "$HOME/.gitconfig.local" # do it hear to make sure it defo makes it
+      link_file "${DOTFILES_ROOT}/git/.gitconfig.local" "$HOME/.gitconfig.local" # do it hear to make sure it defo makes it
     fi
     if [[ ! -L $HOME/.gitconfig ]]; then
-      link_file "git/.gitconfig" "$HOME/.gitconfig" # do it hear to make sure it defo makes it
+      link_file "${DOTFILES_ROOT}/git/.gitconfig" "$HOME/.gitconfig" # do it hear to make sure it defo makes it
     fi
     success 'gitconfig'
   else
