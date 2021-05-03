@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# make new script and add it to local
+# edits existing if already there
+
+source ${DOTFILES}/script/general.sh
+
+line=""
+prompt_line "Name of new script?"
+
+SCRIPTPATH=${DOTFILES}/bin/local/${line}
+touch -a $SCRIPTPATH
+code -w $SCRIPTPATH
+chmod 777 $SCRIPTPATH
+
+info "Created ${line}" "please reload your shell with the 'rel' command"

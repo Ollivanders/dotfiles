@@ -6,4 +6,8 @@ zsh/zshrc.symlink
 zsh/p10k.zsh.symlink
 bin/local/*
 system/local.bzsh
-*local*
+# *local*
+zsh/ohmyzsh/*
+zsh/custom/plugins/zsh-syntax-highlighting/*
+zsh/custom/plugins/zsh-autosuggestions/*
+local/**
