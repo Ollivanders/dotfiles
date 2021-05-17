@@ -48,7 +48,8 @@ if [[ $QUICK = false ]]; then
 fi
 sudo apt-get install $APT_NON_INTERACTIVE_OPTIONS \
   curl \
-  nano
+  nano \
+  fzf
 
 # install chrome
 if [[ $QUICK = false ]]; then

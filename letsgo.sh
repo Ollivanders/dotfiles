@@ -473,15 +473,15 @@ function specific_choice() {
 
   while [[ $line != 'exit' ]]; do
     echo " e - exit "
-    echo " 1 - projects dir "
-    echo " 2 - update "
-    echo " 3 - git "
-    echo " 4 - dotfiles "
-    echo " 5 - os "
-    echo " 6 - software "
-    echo " 7 - zsh "
-    echo " 8 - ssh_keys "
-    echo " 9 - default_editor "
+    echo " 1 - update "
+    echo " 2 - git "
+    echo " 3 - dotfiles "
+    echo " 4 - os "
+    echo " 5 - software "
+    echo " 6 - zsh "
+    echo " 7 - ssh_keys "
+    echo " 8 - default_editor "
+    echo " 9 - projects dir "
 
     choose
 

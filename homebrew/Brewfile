@@ -38,6 +38,7 @@ brew "node"
 brew "npm"
 brew "pyenv"
 brew "pyenv-virtualenv"
+brew "fzf"
 # brew "zlib" # needed for pyenv installing
 # brew "sqlite"
 

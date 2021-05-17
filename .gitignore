@@ -1,8 +1,7 @@
-git/gitconfig.local.symlink
+git/gitconfig.local
 hooks
 docs/imageBoard.key
 git/functions.bzsh
-zsh/zshrc.symlink
 zsh/p10k.zsh.symlink
 bin/local/*
 system/local.bzsh

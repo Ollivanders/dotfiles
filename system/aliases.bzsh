@@ -48,4 +48,7 @@ alias cdot="cd $DOTFILES"
 # Additional apps, scripts and plugins
 eval "$(thefuck --alias fuck)"
 
+alias projects='dir=$(find ${HOME}/Documents/projects -maxdepth 10 -type d -name .git | xargs -r -I {} dirname {} | fzf) && cd $dir'
+alias pcode='dir=$(find ${HOME}/Documents/projects -maxdepth 10 -type d -name .git | xargs -r -I {} dirname {} | fzf) && code $dir'
+
 # TODO configure for bash as well (change system directory to .sh or more gen)
