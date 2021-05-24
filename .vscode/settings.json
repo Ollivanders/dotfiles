@@ -1,12 +1,12 @@
 {
-    "cSpell.words": [
-        "Organisation",
-        "ohmyzzsh"
-    ],
-    "search.exclude": {
-        "**/.git": true,
-        "zsh/ohmyzsh": true,
-        "zsh/custom/themes/powerlevel10k": true,
-        "zsh/custom/plugins/": true,
-    },
+  "cSpell.words": ["Organisation", "ohmyzzsh"],
+  "search.exclude": {
+    "**/.git": true,
+    "zsh/ohmyzsh": true,
+    "zsh/custom/themes/powerlevel10k": true,
+    "zsh/custom/plugins/": true
+  },
+  "git.autoRepositoryDetection": false,
+//   "git.autoRepositoryDetection": "openEditors",
+  "git.ignoredRepositories": ["zsh/ohmyzsh/plugins", "zsh/ohmyzsh/themes"]
 }
