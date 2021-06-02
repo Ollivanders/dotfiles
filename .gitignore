@@ -11,3 +11,4 @@ zsh/custom/plugins/zsh-syntax-highlighting/*
 zsh/custom/plugins/zsh-autosuggestions/*
 local/**
 .vscode
+**/[Ll]ocal*

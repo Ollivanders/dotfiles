@@ -33,8 +33,9 @@ alias pp='python3'
 alias g='git'
 alias rf='rm -rf'
 
-# IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+# IP addresses and remote Management
+alias certscan="openssl s_client -showcerts"
+alias remoteip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
@@ -46,9 +47,12 @@ alias ch="cd ~/"
 alias cdot="cd $DOTFILES"
 
 # Additional apps, scripts and plugins
-eval "$(thefuck --alias fuck)"
+# eval '$(thefuck --alias fuck)'
 
-alias projects='dir=$(find ${HOME}/Documents/projects -maxdepth 10 -type d -name .git | xargs -r -I {} dirname {} | fzf) && cd $dir'
-alias pcode='dir=$(find ${HOME}/Documents/projects -maxdepth 10 -type d -name .git | xargs -r -I {} dirname {} | fzf) && code $dir'
+alias dotenv='export $(xargs -L 1 <.env)'
+
+# TODO add more options to reflect
+alias p='tabinto projects cd'
+alias pcode='tabinto projects code'
 
 # TODO configure for bash as well (change system directory to .sh or more gen)

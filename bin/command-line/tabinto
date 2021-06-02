@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# A script for tabbing through specifed project directories
+
+# options:
+#   repo, projects
+
+tabbing_directory=""
+case $1 in
+"projects")
+    tabbing_directory=${PROJECTS_DIR}
+    ;;
+"scratch")
+    tabbing_directory=${REPOS_DIR}
+    ;;
+"repos")
+    tabbing_directory=${SCRATCH_DIR}
+    ;;
+*)
+    echo "Please pick a set dir from projects, sctrach or repos"
+    exit 1
+    ;;
+esac
+
+# TODO Paramaterise
+GIT_PROJECT="-type d -maxdepth 10 -name .git"
+ALL_DIRS="-type d -maxdepth 1"
+
+DIR_NAME="| xargs -r -I {} dirname {}"
+SPECIFIC=""
+
+ENTRY_OPTION=${ALL_DIRS}
+
+tabbing_directory=${HOME}/Documents/projects
+
+# abilities
+#   cd, code
+case $2 in
+"cd")
+    dir=$(find ${tabbing_directory} ${ENTRY_OPTION} | fzf) && cd $dir
+    ;;
+"code")
+    dir=$(find ${tabbing_directory} $GIT_PROJECT ${ENTRY_OPTION} | fzf) && code $dir
+    ;;
+"editor")
+    dir=$(find ${tabbing_directory} $GIT_PROJECT ${ENTRY_OPTION} | fzf) && ${EDITOR} $dir
+    ;;
+*)
+    echo "Please pick either cd or code"
+    exit 1
+    ;;
+esac

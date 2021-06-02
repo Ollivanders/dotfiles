@@ -441,7 +441,7 @@ function specific_choice() {
       exit
       ;;
     "1")
-      update_software
+      update_configuration
       ;;
     "2")
       setup_git

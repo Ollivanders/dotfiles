@@ -1,0 +1,181 @@
+{
+    "editor.rulers": [100, 120],
+    "http.proxyStrictSSL": false,
+    "files.autoSave": "onFocusChange",
+    "editor.scrollBeyondLastLine": false,
+    "editor.formatOnType": true,
+    // "editor.codeActionsOnSave": {
+    //   "source.organizeImports": true
+    // },
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "C_Cpp.updateChannel": "Insiders",
+    "sync.gist": "252fe073b7a3431a42a073a38a8300f1",
+    "window.autoDetectHighContrast": false,
+    "workbench.iconTheme": "vscode-icons",
+    "arduino.ignoreBoards": [],
+    "explorer.confirmDragAndDrop": false,
+    "workbench.colorTheme": "Darcula Pycharm with Dark GUI",
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "[jsonc]": {
+      "editor.quickSuggestions": {
+        "strings": true
+      },
+      "editor.suggest.insertMode": "replace",
+      "gitlens.codeLens.scopes": ["document"],
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "explorer.autoReveal": false,
+    "settingsSync.ignoredExtensions": [],
+    "explorer.confirmDelete": false,
+    "[json]": {
+      "editor.quickSuggestions": {
+        "strings": true
+      },
+      "editor.suggest.insertMode": "replace",
+      "gitlens.codeLens.scopes": ["document"],
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.rendererType": "canvas",
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "importCost.javascriptExtensions": ["\\.jsx?$"],
+    "remote.SSH.remotePlatform": {
+      "10.26.0.134": "linux"
+    },
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\wsl.exe",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": ["--enable=W0614"],
+    "python.languageServer": "Pylance",
+    // "[python]": {
+    //   "editor.codeActionsOnSave": {
+    //     "source.organizeImports": true
+    //   }
+    // },
+    "[shellscript]": {
+      "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "settingsSync.ignoredSettings": ["terminal.integrated.fontFamily"],
+    "diffEditor.ignoreTrimWhitespace": false,
+    "python.formatting.autopep8Args": [
+      "--ignore",
+      "E402",
+      "--max-line-length=100"
+    ],
+    "cSpell.userWords": [
+      "BUILDKIT",
+      "Baxandall",
+      "Dotfile",
+      "Dotfiles",
+      "KUBE",
+      "KUBECONFIG",
+      "KUBERNETES",
+      "Kaniko",
+      "PIPENV",
+      "PIPFILE",
+      "Synthesising",
+      "WORKON",
+      "Webservice",
+      "ananace",
+      "atexit",
+      "autoloaded",
+      "automator",
+      "bazel",
+      "boto",
+      "bzsh",
+      "chmod",
+      "compatability",
+      "creds",
+      "deps",
+      "devprod",
+      "eips",
+      "envsubst",
+      "file",
+      "gitlab",
+      "keyscan",
+      "kubectl",
+      "letsgo",
+      "macbook",
+      "mkdir",
+      "noqa",
+      "normalise",
+      "ohmyzsh",
+      "orgid",
+      "powerline",
+      "referer",
+      "reqs",
+      "resource",
+      "skopeo",
+      "srcs",
+      "symlink",
+      "symlinked",
+      "symlinks",
+      "synthesise",
+      "toplevel",
+      "unpriv",
+      "virtualenvs",
+      "yocto"
+    ],
+    "[javascript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "workbench.panel.defaultLocation": "right",
+    "editor.minimap.scale": 1,
+    "window.title": "${rootName}",
+    "[dockerfile]": {
+      "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "workbench.editorAssociations": [
+      {
+        "viewType": "jupyter.notebook.ipynb",
+        "filenamePattern": "*.ipynb"
+      }
+    ],
+    "todo-tree.tree.showScanModeButton": false,
+    "liveshare.authenticationProvider": "GitHub",
+    "todo-tree.general.tags": [
+      "BUG",
+      "HACK",
+      "FIXME",
+      "TODO",
+      "XXX",
+      "[ ]",
+      "[x]"
+    ],
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    "projectManager.git.baseFolders": ["~/", "/mnt/c/Users/oliver.baxandall"],
+    "gitlens.views.branches.showBranchComparison": false,
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.associations": {
+      "*.bzsh": "shellscript"
+    },
+    "git.autoStash": true,
+    "merge-conflict.autoNavigateNextConflict.enabled": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[yaml]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "arduino.additionalUrls": [
+      "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
+    ],
+    "gitlab.instanceUrl": "https://gitlab.garrison.local",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "editor.wordWrapColumn": 120,
+    "python.linting.flake8Args": ["--max-line-length=100"],
+    "terminal.integrated.tabs.enabled": true,
+    "launch": {
+      "configurations": [],
+      "compounds": []
+    },
+    "python.formatting.blackArgs": ["--line-length", "100"],
+    "python.linting.flake8Enabled": true,
+    "autoflake.sortImports": true,
+    "autoflake.path": "/home/oli/.local/share/virtualenvs/ultra-platform-Ju8w9QdL/bin/autoflake",
+    "redhat.telemetry.enabled": false,
+    "tabnine.experimentalAutoImports": true
+  }
