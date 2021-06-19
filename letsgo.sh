@@ -91,6 +91,33 @@ function setup_git() {
 }
 
 #------------------------------------------------------------------------------
+# Dirs and tabbing
+function setup_dirs() {
+  begin_step "DIR setup"
+  echo -e "" #\e${FONTFACE}😊\e[0m
+
+  prompt_line_yn "We are going to create some working dirs?"
+
+  while [[ $line =~ 'y' ]]; do
+    info "sweet" "So currently, we are going to make the following"
+    cat ${DOTFILES_ROOT}/system/dirs.bzsh
+    echo "You happy with making these dirs if they don't exist"
+    echo "You will be able to search them using a bunch of handy alias"
+    prompt_line_yn "Would you like to change the paths"
+    if [[ $line =~ 'y' ]]; then
+      ${EDITOR} ${DOTFILES_ROOT}/system/dirs.bzsh
+    fi
+    prompt_line_yn "Are you happy with making these dirs?"
+    if [[ $line =~ 'n' ]]; then
+      prompt_line_yn "Would you like to reconfigure the paths"
+      if [[ $line =~ 'n' ]]; then
+        break
+      fi
+    fi
+  done
+}
+
+#------------------------------------------------------------------------------
 # Install dotfiles
 function install_dotfiles() {
   local overwrite_all=false backup_all=false skip_all=false

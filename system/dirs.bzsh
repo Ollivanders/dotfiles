@@ -1,0 +1,3 @@
+export PROJECTS_DIR="${HOME}/projects"
+export SCRATCH_DIR="${HOME}/scratch"
+export REPOS_DIR="${HOME}/repos"

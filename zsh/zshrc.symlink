@@ -75,7 +75,7 @@ plugins=(
   docker
   git 
   history-substring-search
-  thefuck
+  # thefuck
   # sudo
   zsh-autosuggestions
   zsh-syntax-highlighting 
@@ -91,7 +91,7 @@ plugins=(
   docker
   git 
   history-substring-search
-  thefuck
+  # thefuck
   # sudo
   zsh-autosuggestions
   zsh-syntax-highlighting 

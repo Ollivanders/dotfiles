@@ -9,3 +9,4 @@ alias gco='g checkout'
 alias gcob='g checkout -b'
 alias gw='g w'
 alias grgg='g rhh'
+alias gprev="g prev | sed ''"

@@ -25,9 +25,9 @@ sudo apt-get $APT_NON_INTERACTIVE_OPTIONS upgrade
 
 sudo apt-get install \
   python3
-  python3-dev
-  python3-pip 
-  python3-setuptools
+python3-dev
+python3-pip
+python3-setuptools
 
 ##############################################################################
 # Terminal
@@ -43,8 +43,8 @@ fi
 if [[ $QUICK = false ]]; then
   snap install --classic code
   sudo apt-get install $APT_NON_INTERACTIVE_OPTIONS \
-  npm \
-  nodejs
+    npm \
+    nodejs
 fi
 sudo apt-get install $APT_NON_INTERACTIVE_OPTIONS \
   curl \
@@ -63,8 +63,7 @@ fi
 
 sudo apt-get install git-core
 
-
-sudo pip3 install thefuck
+# sudo pip3 install thefuck
 ##############################################################################
 # Presentation
 ##############################################################################

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Make a dir and set as current directory
+
+mkdir -p -- "$1" && cd -P -- "$1"
